@@ -12,18 +12,18 @@
 
 \section{Overview}
 The \texttt{WCSimDetectorConstruction::ConstructWC()} method returns a pointer on a logical volumes that contains a upright cylindrical detector. The function is defined in \srcfile{ConstructWC.cc}.
-At the moment the detector only consist of balcksheet and PMTs. The PMTs and the blacksheet are organized in cells. This structure should make it easy to add outer detector PMTs or a steal structure behind the blacksheet. 
-I tried to write the method generic and make it possible to use it for different detectors. 
+At the moment the detector only consists of blacksheet and PMTs. The PMTs and the blacksheet are organized in cells. This structure should make it easy to add outer detector PMTs or a steel structure behind the blacksheet. 
+I tried to write the method generically and make it possible to use it for different detectors. 
 
-\subsection{Hirarchy of Volumes}
-This section describes the the volumes use to set up the detector. (figure \ref{fig:hi})
+\subsection{Hierarchy of Volumes}
+This section describes the the volumes used to set up the detector. (figure \ref{fig:hi})
 \begin{figure}
   \begin{center}
   \includegraphics[width=0.45\textwidth]{expHall} 
   \hspace{0.1\textwidth}
   \includegraphics[width=0.35\textwidth]{annulus}
   \end{center}
-  \caption{The detector geometry consists of volumes, that are placed into each other: \volume{expHall} (black dotted line) in not part of the logical volume returned by \texttt{WCSimDetectorConstruction::ConstructWC()}, \volume{WC} (black) is the volume returned by this function, \volume{WCBarrel} (blue) is filled with water, \volume{WCBarrelAnuluss}, \volume{WCBarrelBorderCell} and  \volume{WCPMTCap} (red) are the volumes the are derived into the cells (green) that hold the PMTs (not pictured) and the blacksheet (thick black line).}\label{fig:hi}
+  \caption{The detector geometry consists of volumes that are placed inside each other: \volume{expHall} (black dotted line) in not part of the logical volume returned by \texttt{WCSimDetectorConstruction::ConstructWC()}, \volume{WC} (black) is the volume returned by this function, \volume{WCBarrel} (blue) is filled with water, \volume{WCBarrelAnuluss}, \volume{WCBarrelBorderCell} and  \volume{WCPMTCap} (red) are the volumes that are divided into the cells (green) that hold the PMTs (not pictured) and the blacksheet (thick black line).}\label{fig:hi}
 \end{figure}
 
 
@@ -42,19 +42,19 @@ This section describes the the volumes use to set up the detector. (figure \ref{
       more PMTs (\volume{WCBarrelPMT}). 
       The Volume is divided in rings (\volume{WCBarellRing}) and these rings 
       are cells  (\volume{WCBarellCell}) afterward. 
-    \item[WCPMTCap] This two volumes cover the bottom and the top of the 
+    \item[WCPMTCap] These two volumes cover the bottom and the top of the 
      detector. They are not divided into cells, but contain the blacksheet
-      (\volume{WCCapBlackSheet}) and PTMs
+      (\volume{WCCapBlackSheet}) and PMTs
       (\volume{WCCapPMT}) directly.
     \item[WCBarrelBorder] This two Volumes connect the annuls and the caps. 
       They are divided into cells (\volume{WCBarrelBorderCell}), that contain the same number of PMTs and the same
-    balcksheet as the normal annulus cells.
+    blacksheet as the normal annulus cells.
     
 \begin{figure}
    \begin{center}
 \includegraphics{extraTower} 
   \end{center}
-\caption{If the number of PMTs in one cell (2) does not divides the total number of PMTs in one ring (21), there is an extra tower, that contains the remaining PMTs}\label{fig:extra}
+\caption{If the number of PMTs in one cell (2) does not divide the total number of PMTs in one ring (21), there is an extra tower that contains the remaining PMTs}\label{fig:extra}
 \end{figure}
 
     \item[WCextraTower] is a tower that is narrower than the normal cells. It is divided 
@@ -62,7 +62,8 @@ This section describes the the volumes use to set up the detector. (figure \ref{
      (\volume{WCExtraTowerBlackSheet}).
     \item[WCspecialBarrelBorderCell] Also the extra tower needs special volumes to connect it 
     to the caps.
-   \end{description}
+    \item[WCTopVeto] Above the top cap, the top veto volume (when enabled) contains PMTs and surrounds then with Tyvek and blacksheet.
+    \end{description}
   \end{description}
  \end{description}
 \end{description}
@@ -72,8 +73,8 @@ This section describes the the volumes use to set up the detector. (figure \ref{
 
 \section{Setup your own detector}
 
-You have to store the dimensions of the detector you want to setup in member variables of  \texttt{WCSimDetectorConstruction} before calling  \texttt{WCSimDetectorConstruction::ConstructWC()}. The next section describes, which variables you have to set. The best way to to set the variables is to add an method to the \texttt{WCSimDetectorConstruction} class that set all variables. These function are at the beginning of \srcfile{ConstructWC.cc}.
-You can either call this function in the constructor of \texttt{WCSimDetectorConstruction} or add it to the detector messenger (\srcfile{DetectorMessenger.cc}), if you want call it in a macro file or you want to change the detector setup dynamically. If you want to do this, you first have to use the command, that calls your function (\texttt{/WCSim/WCgeom <geometry name>}) and afterwards the detector construction command (\texttt{/WCSim/Construct}).
+You have to store the dimensions of the detector you want to setup in member variables of  \texttt{WCSimDetectorConstruction} before calling  \texttt{WCSimDetectorConstruction::ConstructWC()}. The next section describes which variables you have to set. The best way to to set the variables is to add a method to the \texttt{WCSimDetectorConstruction} class that set all variables. These function are at the beginning of \srcfile{ConstructWC.cc}.
+You can either call this function in the constructor of \texttt{WCSimDetectorConstruction} or add it to the detector messenger (\srcfile{DetectorMessenger.cc}), if you want call it in a macro file or you want to change the detector setup dynamically. If you want to do this, you first have to use the command, that calls your function (\texttt{/WCSim/WCgeom <geometry name>}) and afterward the detector construction command (\texttt{/WCSim/Construct}).
 
 \subsection{Variables}
 To set up a new detector geometry you have to set the following variables:
@@ -87,19 +88,19 @@ To set up a new detector geometry you have to set the following variables:
 
 
 \begin{description}
-\item[WCIDHeight, WCIDDiameter] This two variables are used, to setup the size of the detector. The height is the distance between the inner surfaces of the top and the bottom blacksheet and the diameter is two times the shortest distance between the inner surface of the wall blacksheet and the center of the detector.
+\item[WCIDHeight, WCIDDiameter] These two variables are used to setup the size of the detector. The height is the distance between the inner surfaces of the top and the bottom blacksheet and the diameter is two times the shortest distance between the inner surface of the wall blacksheet and the center of the detector.
 
-\item[WCPMTRadius, WCPMTexposeHeight] see figure \ref{fig:pmt}. Make sure, that you only use PTMs that are known by the digitizer class. It uses the radius to identify  the PMTs. Check the beginning of \texttt{ WCSimWCDigitizer::DigitizeGate(\ldots)} in \srcfile{WCDigitizer.cc} for the supported PMTs.
+\item[WCPMTRadius, WCPMTexposeHeight] see figure \ref{fig:pmt}. Make sure that you only use PMTs that are known by the digitizer class. It uses the radius to identify the PMTs. Check the beginning of \texttt{ WCSimWCDigitizer::DigitizeGate(\ldots)} in \srcfile{WCDigitizer.cc} for the supported PMTs.
 
 
 \begin{figure}
   \begin{center}
     \includegraphics{PMT}
   \end{center}
-\caption{The PMTs are segments of spheres. The sensitive part is the volume inside of the glass. To define the geometry of the PMTs you need to set the \texttt{WCPMTGlassThicknes}, the \texttt{WCPMTRadius}, and the \texttt{WCPMTExposeHight}}\label{fig:pmt}
+\caption{The PMTs are segments of spheres. The sensitive part is the volume inside of the glass. To define the geometry of the PMTs you need to set the \texttt{WCPMTGlassThickness}, the \texttt{WCPMTRadius}, and the \texttt{WCPMTExposeHight}}\label{fig:pmt}
 \end{figure}
 
-\item[WCPMTGlassThicknes] the thickness of the glass face.
+\item[WCPMTGlassThickness] the thickness of the glass face.
 
 \item[WCPMTperCellHorizontal, WCPMTperCellVertical] defines how many PMTs are there in one Cell.
 
@@ -113,10 +114,12 @@ To set up a new detector geometry you have to set the following variables:
 
 \item[WCCapEdgeLimit] This is the maximum distance between the center of the a cap and a point on a cap PMT. This length has to be smaller than half the \texttt{WCIDDiameter}. Otherwise there will be PMTs that intersect the edge of the caps.
 
-\item[WCBlackSheetThickness] the thickness of the balcksheet.
+\item[WCBlackSheetThickness] the thickness of the blacksheet.
 \end {description}
 
-All other values needed to construct set up the geometry are derived from this variables.
+\texttt{/WCSim/tuning/topveto} and \texttt{/WCSim/tuning/tvspacing} are set in tuning\textunderscore parameters.mac and turn the top veto on and off and set the spacing in centimeters.  The top veto defaults to off.
+
+All other values needed to construct set up the geometry are derived from these variables.
 
 \subsection{Example}
 
@@ -164,12 +167,12 @@ This can also happen at the caps if \texttt{WCCapEdgeLimit} is close to the inne
   \begin{center}
 \includegraphics{warning}
   \end{center}
-\caption{The topmost and bottom PMTs could  intersect the border of the cells.} \label{fig:warning}
+\caption{The topmost and bottommost PMTs could  intersect the border of the cells.} \label{fig:warning}
 \end{figure}
 
-During the setup of the geometry is checked if the PMTs at the wall intersect each other or the border of the cells. You should see a lot of the flowing lines:\\
+During the setup of the geometry there is checked if the PMTs at the wall intersect each other or the border of the cells. You should see a lot of the flowing lines:\\
 \texttt{Checking overlaps for volume WCBarrelPMT ... OK!}\\
-If you see warnings instead, it is likely, that there are too large or too many PMTs.
+If you see warnings instead it is likely that there are too many PMTs or the PMTs are too large.
 
 There is no check if the placement of the PMTs on caps is correct. It would take to much time to do this check every time, because there are too many PMTs in side a single volume\footnote{It would be nice to nice to implement a check if a PMT is close to the edge of the cap and do to the test if the placement s correct only for the PMT that are close to the edge.}. 
  
@@ -178,15 +181,15 @@ There is no check if the placement of the PMTs on caps is correct. It would take
 
 
 \section{root2zbs and superscan}
-WCSim writes sores the results of a simulation in a root file. You can set the name and path of this file in the \texttt{vis.mac} file using the \texttt{/WCSimIO/RootFile} command. To view the results of the simulation with superscan, you have to convert it into a zbs-file first. To do this use \texttt{root2zbs <inpu file> <output file>}.
+WCSim writes sores the results of a simulation in a root file. You can set the name and path of this file in the \texttt{vis.mac} file using the \texttt{/WCSimIO/RootFile} command. To view the results of the simulation with superscan, you have to convert it into a zbs-file first. To do this use \texttt{root2zbs <input file> <output file>}.
 
-To open this file with superscan you need the \texttt{geofile.txt} WCSim produces and a special version of superscan, that can read in this file. In this file the positions and orientations of all PMTs and the size of the detector is store. To let superscan know, that there is a geofile, you have to set the \texttt{G4GEOFILE} environment variable to the path of this file.
+To open this file with superscan you need the \texttt{geofile.txt} WCSim produces a special version of superscan that can read in this file. In this file the positions and orientations of all PMTs and the size of the detector is stored. To let superscan know that there is a geofile, you have to set the \texttt{G4GEOFILE} environment variable to the path of this file.
 
 
 \begin{figure}
   \begin{center}
 \includegraphics{Cell}
   \end{center}
-\caption{Each cell holds blacksheet and multiple PMTs. All labeled length are calculated automatically. In the current version, the PMTs are distributed equally in horizontal and vertical direction.}
+\caption{Each cell holds blacksheet and multiple PMTs. All labeled lengths are calculated automatically. In the current version, the PMTs are distributed equally in the horizontal and vertical directions.}
 \end{figure}
 \end{document}
