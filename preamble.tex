@@ -1,5 +1,5 @@
 \documentclass[11pts,english,letterpaper]{scrartcl}
-
+%\usepackage{SIunits}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{babel} 
@@ -14,6 +14,7 @@
 \usepackage{layout}
 \usepackage{mathpazo}
 \usepackage{microtype}
+%\usepackage{blindtext}
 \usepackage{xcolor}
 \usepackage{tabularx}
 \usepackage{paralist}
@@ -22,10 +23,33 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{lscape}
+\usepackage{listings}
+\usepackage[margin=0.5cm,font=small,labelfont=bf]{caption}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{lgray}{rgb}{0.8,0.8,0.8}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  language=C++,
+  basicstyle=\tt\small,
+  xleftmargin=1cm,
+  xrightmargin=1cm,
+  breaklines=false,
+  rulecolor=\color{black},
+%  backgroundcolor=\color{lgray},
+  keywordstyle=\color{blue},          % keyword style
+  commentstyle=\color{dkgreen},       % comment style
+  stringstyle=\color{mauve},         % string literal style
+  morekeywords={TTree},
+  morekeywords={->}
+}
 
 \makeindex
 
 \usepackage[colorlinks,linktocpage]{hyperref}
+
 
 \newcommand\ERR[3][]{$\left(#2 \pm #3\right) #1$}
 \newcommand\ERRm[3][]{\left(#2 \pm #3\right) #1}
@@ -33,7 +57,9 @@
 \newcommand\grad[0]{{}^\circ}
 \newcommand\srcfile[1]{\texttt{src/WCSim#1}}
 \newcommand\volume[1]{\textsf{\textbf{#1}}}
-
+%\floatstyle{ruled}
+%\newfloat{Beispiel}{!htb}{lop}[section]
+%\restylefloat{table}
 \floatplacement{figure}{!htb}
-\graphicspath{{./figures/}}
+
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -9,15 +10,15 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="358.15414"
-   height="424.25311"
+   width="308.58414"
+   height="422.39346"
    id="svg5449"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.47 r22583"
    sodipodi:docname="annulus.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    version="1.0"
-   inkscape:export-filename="/home/johannes/Desktop/docu/annulus.png"
+   inkscape:export-filename="/home/ah243/ana/LBNE/docu-new/annulus.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -31,7 +32,7 @@
        style="overflow:visible">
       <path
          id="path3811"
-         d="M 0,0 L 5,-5 L -12.5,0 L 5,5 L 0,0 z"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
          transform="matrix(-0.8,0,0,-0.8,-10,0)" />
     </marker>
@@ -42,6 +43,111 @@
        inkscape:vp_z="744.09448 : 526.18109 : 1"
        inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
        id="perspective5455" />
+    <inkscape:perspective
+       id="perspective2865"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2890"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2915"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2940"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2965"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2965-8"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3005"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3031"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3053"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3078"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3102"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3129"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3153"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3181"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2899"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      inkscape:document-units="mm"
@@ -52,32 +158,29 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.6976026"
-     inkscape:cx="231.98072"
-     inkscape:cy="273.27065"
+     inkscape:cx="199.25701"
+     inkscape:cy="193.05883"
      inkscape:current-layer="layer1"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:window-width="1024"
-     inkscape:window-height="741"
+     inkscape:window-width="1920"
+     inkscape:window-height="1125"
      inkscape:window-x="0"
-     inkscape:window-y="3">
+     inkscape:window-y="25"
+     inkscape:window-maximized="1">
     <sodipodi:guide
        orientation="0,1"
-       position="473.76154,1201.0714"
+       position="444.36967,1201.0777"
        id="guide5969" />
     <sodipodi:guide
        orientation="0,1"
-       position="494.97475,1230.3658"
+       position="465.58288,1230.3721"
        id="guide5971" />
     <sodipodi:guide
        orientation="0,1"
-       position="548.51283,1146.5231"
+       position="519.12096,1146.5294"
        id="guide5973" />
-    <sodipodi:guide
-       orientation="1,0"
-       position="-4.0406102,988.93934"
-       id="guide5975" />
   </sodipodi:namedview>
   <metadata
      id="metadata4">
@@ -87,6 +190,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -94,10 +198,10 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-108.59687,-69.994305)">
+     transform="translate(-137.98874,-71.860239)">
     <path
-       style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 118.1875,83.625 L 118.1875,121 L 132.34375,121 L 162.625,151.3125 L 377.8125,151.3125 L 408.09375,121 L 422.25,121 L 422.25,83.625 L 118.1875,83.625 z"
+       style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#ff0000;stroke-width:0.95498002000000004px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:Sans;font-family:Sans"
+       d="m 147.06386,98.303666 0,36.039954 13.38856,0 28.63912,29.22971 203.51797,0 28.63912,-29.22971 13.38855,0 0,-36.039954 -287.57332,0 z"
        id="path5977"
        sodipodi:nodetypes="ccccccccc" />
     <use
@@ -105,51 +209,55 @@
        y="0"
        xlink:href="#path5977"
        id="use5982"
-       transform="matrix(-1,0,0,-1,540.4375,563.23708)"
+       transform="matrix(-1,0,0,-1,581.70105,578.44948)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 384.86812,156.86196 L 408.6067,132.6183 L 417.19299,132.6183 L 417.19299,204.33913 L 384.86812,204.33913 L 384.86812,156.86196 z"
+       style="fill:none;stroke:#008000;stroke-width:0.95498002000000004px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:Sans;font-family:Sans"
+       d="m 399.28251,168.92456 22.45125,-23.37766 8.12066,0 0,69.15891 -30.57191,0 0,-45.78125 z"
        id="path5988"
        sodipodi:nodetypes="cccccc" />
     <path
        sodipodi:nodetypes="ccccc"
        id="path5990"
-       d="M 383.83512,218.4584 L 416.20569,218.91773 L 416.20569,277.48191 L 383.83512,277.48191 L 383.83512,218.4584 z"
-       style="fill:none;fill-rule:evenodd;stroke:#008000;stroke-width:0.95430231px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       d="m 398.30553,228.32073 30.61513,0.44292 0,56.47223 -30.61513,0 0,-56.91515 z"
+       style="fill:none;stroke:#008000;stroke-width:0.91133958000000004px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#path5990"
        id="use5994"
-       transform="translate(0,66.28111)"
+       transform="translate(-4.3106683e-7,63.913498)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <path
        sodipodi:nodetypes="cccccc"
        id="path6006"
-       d="M 381.06693,153.12262 L 408.90485,125.63357 L 421.49926,125.63357 L 421.49926,208.79847 L 381.06693,208.79847 L 381.06693,153.12262 z"
-       style="fill:none;fill-rule:evenodd;stroke:#ff0000;stroke-width:0.81850392;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       d="m 395.68745,165.31879 26.32828,-26.50712 11.91143,0 0,80.19418 -38.23971,0 0,-53.68706 z"
+       style="fill:none;stroke:#ff0000;stroke-width:0.78165483000000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#path5988"
        id="use6012"
-       transform="matrix(1,0,0,-1,0,562.22144)"
+       transform="matrix(1,0,0,-1,-4.3106683e-7,577.47012)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#path6006"
        id="use6014"
-       transform="matrix(1,0,0,-1,0,562.22144)"
+       transform="matrix(1,0,0,-1,-4.3106683e-7,577.47012)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 379.81736,213.43049 L 421.23361,213.43049 L 421.23361,349.80109 L 379.81736,349.80109 L 379.81736,213.43049"
+       style="fill:none;stroke:#ff0000;stroke-width:0.95498002000000004px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:Sans;font-family:Sans"
+       d="m 394.50565,223.47242 39.17026,0 0,131.49934 -39.17026,0 0,-131.49934"
        id="path6016"
        sodipodi:nodetypes="ccccc" />
     <use
@@ -157,61 +265,67 @@
        y="0"
        xlink:href="#path5988"
        id="use6018"
-       transform="matrix(-1,0,0,1,539.59636,0)"
+       transform="matrix(-1,0,0,1,580.90552,-4.5692193e-7)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#path5990"
        id="use6020"
-       transform="matrix(-1,0,0,1,539.59636,0)"
+       transform="matrix(-1,0,0,1,580.90552,-4.5692193e-7)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#use5994"
        id="use6022"
-       transform="matrix(-1,0,0,1,539.59636,0)"
+       transform="matrix(-1,0,0,1,580.90552,-4.5692193e-7)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#path6006"
        id="use6024"
-       transform="matrix(-1,0,0,1,539.59636,0)"
+       transform="matrix(-1,0,0,1,580.90552,-4.5692193e-7)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#use6012"
        id="use6026"
-       transform="matrix(-1,0,0,1,539.59636,0)"
+       transform="matrix(-1,0,0,1,580.90552,-4.5692193e-7)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#use6014"
        id="use6028"
-       transform="matrix(-1,0,0,1,539.59636,0)"
+       transform="matrix(-1,0,0,1,580.90552,-4.5692193e-7)"
        width="744.09448"
        height="1052.3622"
-       style="stroke:#ff0000" />
+       style="stroke:#ff0000;-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#path6016"
        id="use6030"
-       transform="matrix(-1,0,0,1,539.59636,0)"
+       transform="matrix(-1,0,0,1,580.90552,-4.5692193e-7)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:7.37716532;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 126.26907,115.95077 L 126.26907,93.727417 L 413.15239,93.727417 L 413.15239,115.95077"
+       style="fill:none;stroke:#000000;stroke-width:7.04504538000000036;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;-inkscape-font-specification:Sans;font-family:Sans"
+       d="m 154.70718,129.47475 0,-21.42952 271.32576,0 0,21.42952"
        id="path6032"
        sodipodi:nodetypes="cccc" />
     <use
@@ -219,12 +333,13 @@
        y="0"
        xlink:href="#path6032"
        id="use6034"
-       transform="matrix(1,0,0,-1,1.0101525,563.23158)"
+       transform="matrix(1,0,0,-1,0.95537257,578.44417)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:7.1291337;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 411.13208,135.61175 L 411.13208,201.34566"
+       style="fill:none;stroke:#000000;stroke-width:6.80818032999999989;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;-inkscape-font-specification:Sans;font-family:Sans"
+       d="m 424.12218,148.43342 0,63.38584"
        id="path6038"
        sodipodi:nodetypes="cc" />
     <use
@@ -232,95 +347,247 @@
        y="0"
        xlink:href="#path6038"
        id="use6040"
-       transform="translate(-4.5351673e-8,226.27417)"
+       transform="translate(-4.3106683e-7,218.19148)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#use6040"
        id="use6042"
-       transform="translate(-282.84272,-2.0203051)"
+       transform="translate(-267.50428,-1.9481381)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#use6042"
        id="use6044"
-       transform="translate(0,-224.25387)"
+       transform="translate(-4.3106683e-7,-216.24335)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        height="1052.3622"
        width="744.09448"
-       transform="matrix(1,0,0,0.7504531,280.82241,-47.456782)"
+       transform="matrix(1,0,0,0.7504531,265.59354,-41.353137)"
        id="use6046"
        xlink:href="#use6042"
        y="0"
-       x="0" />
+       x="0"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#use6046"
        id="use6048"
-       transform="translate(1.0101525,67.680221)"
+       transform="translate(0.95537257,65.262632)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#use6048"
        id="use6050"
-       transform="translate(-281.83256,0)"
+       transform="translate(-266.54891,-4.5692193e-7)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <use
        x="0"
        y="0"
        xlink:href="#use6050"
        id="use6052"
-       transform="translate(0,-67.680221)"
+       transform="translate(-4.3106683e-7,-65.262632)"
        width="744.09448"
-       height="1052.3622" />
+       height="1052.3622"
+       style="-inkscape-font-specification:Sans;font-family:Sans" />
     <rect
-       style="fill:#000000;fill-opacity:0;fill-rule:nonzero;stroke:#0000ff;stroke-width:0.99921262;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#000000;fill-opacity:0;fill-rule:nonzero;stroke:#0000ff;stroke-width:0.95422810000000002;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;-inkscape-font-specification:Sans;font-family:Sans"
        id="rect6054"
-       width="325.26913"
-       height="423.25391"
-       x="109.09647"
-       y="70.493912" />
+       width="307.62991"
+       height="408.13495"
+       x="138.46585"
+       y="85.641647" />
+    <rect
+       style="fill:none;stroke:#ffcc00;stroke-width:0.95498002000000004;-inkscape-font-specification:Sans;font-family:Sans"
+       id="rect2855"
+       width="294.08167"
+       height="125.67535"
+       x="143.36433"
+       y="95.079376" />
+    <rect
+       style="fill:none;stroke:#ffcc00;stroke-width:0.95498002000000004;-inkscape-font-specification:Sans;font-family:Sans"
+       id="rect2857"
+       width="291.65298"
+       height="125.81734"
+       x="145.51445"
+       y="356.79651" />
     <text
        xml:space="preserve"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
-       x="139.34753"
-       y="-443.80283"
-       id="text3286"
-       sodipodi:linespacing="125%"
-       transform="matrix(0,1,-1,0,0,0)"><tspan
+       style="font-size:43.75675583000000302px;font-style:normal;font-weight:normal;fill:#0000ff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="139.7829"
+       y="84.108253"
+       id="text2853"
+       transform="scale(1.0085208,0.99155118)"><tspan
          sodipodi:role="line"
-         id="tspan3288"
-         x="139.34753"
-         y="-443.80283">WCBarrelPMTOffset</tspan></text>
+         id="tspan2855"
+         x="139.7829"
+         y="84.108253"
+         style="font-size:15.31486416000000084px;fill:#0000ff;-inkscape-font-specification:Sans;font-family:Sans">WCBarrel</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:43.75675583000000302px;font-style:normal;font-weight:normal;fill:#ffcc00;fill-opacity:0.87843137000000004;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="193.013"
+       y="220.45769"
+       id="text2853-3"
+       transform="scale(1.0085208,0.99155118)"><tspan
+         sodipodi:role="line"
+         id="tspan2855-1"
+         x="193.013"
+         y="220.45769"
+         style="font-size:13.12702655999999912px;fill:#ffcc00;fill-opacity:0.87843137000000004;-inkscape-font-specification:Sans;font-family:Sans">WCTopCapAssembly</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:43.75675583000000302px;font-style:normal;font-weight:normal;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="195.43561"
+       y="370.9393"
+       id="text2853-3-2"
+       transform="scale(1.0085208,0.99155118)"><tspan
+         sodipodi:role="line"
+         id="tspan2855-1-8"
+         x="195.43561"
+         y="370.9393"
+         style="font-size:13.12702655999999912px;fill:#ffcc00;fill-opacity:1;-inkscape-font-specification:Sans;font-family:Sans">WCBottomCapAssembly</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:43.75675583000000302px;font-style:normal;font-weight:normal;fill:#ff0000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="189.79108"
+       y="163.10693"
+       id="text2853-0"
+       transform="scale(1.0085208,0.99155118)"><tspan
+         sodipodi:role="line"
+         id="tspan2855-8"
+         x="189.79108"
+         y="163.10693"
+         style="font-size:13.12702655999999912px;fill:#ff0000;-inkscape-font-specification:Sans;font-family:Sans">WCTopCap</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:43.75675583000000302px;font-style:normal;font-weight:normal;fill:#ff0000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="187.58159"
+       y="430.10785"
+       id="text2853-0-0"
+       transform="scale(1.0085208,0.99155118)"><tspan
+         sodipodi:role="line"
+         id="tspan2855-8-2"
+         x="187.58159"
+         y="430.10785"
+         style="font-size:13.12702655999999912px;fill:#ff0000;-inkscape-font-specification:Sans;font-family:Sans">WCBottomCap</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:43.75675583000000302px;font-style:normal;font-weight:normal;fill:#ff0000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="230.80823"
+       y="297.8476"
+       id="text2853-0-4"
+       transform="matrix(1.0085196,-0.00151285,0.00153874,0.99155004,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan2855-8-6"
+         x="230.80823"
+         y="297.8476"
+         style="font-size:13.12702655999999912px;fill:#ff0000;-inkscape-font-specification:Sans;font-family:Sans">WCBarrelAnnulus</tspan><tspan
+         sodipodi:role="line"
+         x="230.80823"
+         y="314.25638"
+         style="font-size:13.12702655999999912px;fill:#ff0000;-inkscape-font-specification:Sans;font-family:Sans"
+         id="tspan2982" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:43.75675583000000302px;font-style:normal;font-weight:normal;fill:#008000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="300.78662"
+       y="239.74812"
+       id="text2853-0-1"
+       transform="matrix(1.0084779,0.00914908,-0.00930566,0.99150895,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan2855-8-3"
+         x="300.78662"
+         y="239.74812"
+         style="font-size:9.84527016000000010px;fill:#008000;-inkscape-font-specification:Sans;font-family:Sans">WCBarrelRing</tspan><tspan
+         sodipodi:role="line"
+         x="300.78662"
+         y="250.96436"
+         style="font-size:8.75135135999999925px;fill:#008000;-inkscape-font-specification:Sans;font-family:Sans"
+         id="tspan2889">(WCBarrelCells)</tspan></text>
     <path
-       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.6448819;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 418.57143,98.790754 L 459.94884,98.790754"
-       id="path3290"
-       sodipodi:nodetypes="cc" />
+       style="fill:#008000;stroke:#008000;stroke-width:0.71006851999999998px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:Sans;font-family:Sans"
+       d="m 368.11039,244.34802 30.67471,13.86542"
+       id="path2995" />
     <path
-       sodipodi:nodetypes="cc"
-       id="path3292"
-       d="M 417.85714,115.21933 L 459.23455,115.21933"
-       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.6448819;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       style="fill:none;stroke:#ff0000;stroke-width:1.05519937999999991px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:Sans;font-family:Sans"
+       d="M 232.46426,289.81562 186.28365,267.09464"
+       id="path3019-1" />
+    <text
+       xml:space="preserve"
+       style="font-size:43.75675583000000302px;font-style:normal;font-weight:normal;fill:#ff0000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="237.11662"
+       y="194.65068"
+       id="text2853-0-8"
+       transform="scale(1.0085208,0.99155118)"><tspan
+         sodipodi:role="line"
+         id="tspan2855-8-5"
+         x="237.11662"
+         y="194.65068"
+         style="font-size:9.84527016000000010px;fill:#ff0000;-inkscape-font-specification:Sans;font-family:Sans">WCBarrelBorderRing</tspan></text>
     <path
-       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.6448819;stroke-linecap:round;stroke-linejoin:round;marker-start:none;marker-end:url(#Arrow1Lend);stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 451.2522,78.665534 L 451.2522,97.236963"
-       id="path3294"
-       sodipodi:nodetypes="cc" />
+       style="fill:none;stroke:#ff0000;stroke-width:1.05519937999999991px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:Sans;font-family:Sans"
+       d="M 347.94159,289.81562 394.1222,267.09464"
+       id="path3019-1-4" />
     <path
-       sodipodi:nodetypes="cc"
-       id="path4583"
-       d="M 451.2522,135.09411 L 451.2522,116.52268"
-       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.6448819;stroke-linecap:round;stroke-linejoin:round;marker-start:none;marker-end:url(#Arrow1Lend);stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       style="fill:none;stroke:#ff0000;stroke-width:0.87384033000000005px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:Sans;font-family:Sans"
+       d="M 238.06659,189.43674 186.50402,175.48118"
+       id="path3019-1-5" />
+    <path
+       style="fill:none;stroke:#ff0000;stroke-width:0.88957774999999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:Sans;font-family:Sans"
+       d="m 341.03431,189.42894 53.49635,-13.93996"
+       id="path3019-1-5-5" />
+    <text
+       xml:space="preserve"
+       style="font-size:43.75675583000000302px;font-style:normal;font-weight:normal;fill:#008000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="272.3569"
+       y="382.63565"
+       id="text2853-0-1-2"
+       transform="matrix(1.0084779,0.00914908,-0.00930566,0.99150895,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan2855-8-3-8"
+         x="272.3569"
+         y="382.63565"
+         style="font-size:9.84527016000000010px;fill:#008000;-inkscape-font-specification:Sans;font-family:Sans">WCBarrelBorderRing</tspan><tspan
+         sodipodi:role="line"
+         x="272.3569"
+         y="393.85187"
+         style="font-size:8.75135135999999925px;fill:#008000;-inkscape-font-specification:Sans;font-family:Sans"
+         id="tspan2919">(WCBarrelBorderCells)</tspan></text>
+    <path
+       style="fill:#008000;stroke:#008000;stroke-width:0.71006851999999998px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:Sans;font-family:Sans"
+       d="m 368.39752,386.602 30.6747,13.86542"
+       id="path2995-1" />
+    <text
+       xml:space="preserve"
+       style="font-size:43.75675583000000302px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="204.70892"
+       y="330.01694"
+       id="text2853-0-1-22"
+       transform="matrix(1.0084779,0.00914908,-0.00930566,0.99150895,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan2855-8-3-9"
+         x="204.70892"
+         y="330.01694"
+         style="font-size:9.84527016000000010px;fill:#000000;-inkscape-font-specification:Sans;font-family:Sans">WCBarrelCellBlackSheet</tspan></text>
+    <path
+       style="fill:#008000;stroke:#000000;stroke-width:0.82362360000000001px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;-inkscape-font-specification:Sans;font-family:Sans"
+       d="m 159.04889,311.82381 41.60817,13.75283"
+       id="path2995-7" />
   </g>
 </svg>

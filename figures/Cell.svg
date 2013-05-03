@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -13,7 +14,7 @@
    height="312.9863"
    id="svg6738"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.47 r22583"
    sodipodi:docname="Cell.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    version="1.0"
@@ -146,6 +147,13 @@
        fx="403.79752"
        fy="65.47242"
        r="12.081983" />
+    <inkscape:perspective
+       id="perspective4182"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      inkscape:document-units="mm"
@@ -155,15 +163,18 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="349.53541"
-     inkscape:cy="59.637151"
+     inkscape:zoom="1.979899"
+     inkscape:cx="374.89135"
+     inkscape:cy="118.226"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1024"
-     inkscape:window-height="741"
+     inkscape:window-width="1920"
+     inkscape:window-height="1125"
      inkscape:window-x="0"
-     inkscape:window-y="3" />
+     inkscape:window-y="25"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata4">
     <rdf:RDF>
@@ -188,7 +199,7 @@
        sodipodi:cy="267.47366"
        sodipodi:rx="106.57109"
        sodipodi:ry="101.01525"
-       d="M 308.12328,176.81223 A 106.57109,101.01525 0 0 1 334.45965,194.17869"
+       d="m 308.12328,176.81223 c 9.65303,4.49597 18.53241,10.35112 26.33637,17.36646"
        sodipodi:start="5.1691121"
        sodipodi:end="5.4713037"
        transform="matrix(1.7582805,0,0,0.7541137,-266.19085,176.88683)"
@@ -344,7 +355,7 @@
        id="path9325" />
     <text
        xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
        x="264.65997"
        y="333.13358"
        id="text27117"
@@ -352,31 +363,26 @@
          sodipodi:role="line"
          id="tspan27119"
          x="264.65997"
-         y="333.13358">dPhi</tspan></text>
+         y="333.13358"
+         style="font-family:Sans;-inkscape-font-specification:Sans" /><tspan
+         sodipodi:role="line"
+         x="264.65997"
+         y="333.13358"
+         style="font-family:Sans;-inkscape-font-specification:Sans"
+         id="tspan4168" /></text>
     <text
-       sodipodi:linespacing="125%"
-       id="text27121"
-       y="498.78494"
-       x="101.83212"
-       style="font-size:12.00000191px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
+       transform="matrix(0.86622532,-0.49965357,0.49965357,0.86622532,0,0)"
        xml:space="preserve"
-       transform="matrix(0.8430017,-0.5379109,0.5379109,0.8430017,0,0)"><tspan
-         y="498.78494"
-         x="101.83212"
-         id="tspan27123"
-         sodipodi:role="line">innerAnnulusRadius</tspan></text>
-    <text
-       transform="matrix(0.8438164,-0.5366319,0.5366319,0.8438164,0,0)"
-       xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
-       x="-20.853189"
-       y="338.78052"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
+       x="-19.344851"
+       y="342.72623"
        id="text27125"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan27127"
-         x="-20.853189"
-         y="338.78052">outerAnnulusRadius</tspan></text>
+         x="-19.344851"
+         y="342.72623"
+         style="-inkscape-font-specification:Sans;font-family:Sans;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">innerAnnulusRadius</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.6448819;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 507.09658,249.29091 L 546.49253,260.40258"
@@ -392,40 +398,60 @@
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.6448819;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        sodipodi:nodetypes="cc" />
     <text
-       sodipodi:linespacing="125%"
-       id="text27139"
-       y="219.99289"
-       x="555.82275"
-       style="font-size:11.99999714px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
        xml:space="preserve"
-       transform="matrix(0.9999501,-9.985389e-3,9.985389e-3,0.9999501,0,0)"><tspan
-         y="219.99289"
-         x="555.82275"
-         id="tspan27141"
-         sodipodi:role="line">barrelCellHeight</tspan></text>
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="203.64076"
+       y="162.82661"
+       id="text4156"><tspan
+         sodipodi:role="line"
+         id="tspan4158"
+         x="203.64076"
+         y="162.82661"
+         style="font-size:14px">verticalSpacing</tspan></text>
     <text
-       transform="matrix(0.9999501,-9.9853898e-3,9.9853898e-3,0.9999501,0,0)"
        xml:space="preserve"
-       style="font-size:11.99999523px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
-       x="485.12421"
-       y="117.25639"
-       id="text27143"
+       style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="475.3718"
+       y="116.3596"
+       id="text4160"><tspan
+         sodipodi:role="line"
+         id="tspan4162"
+         x="475.3718"
+         y="116.3596">barrelCellWidth</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="165.70232"
+       y="-558.0647"
+       id="text4164"
+       transform="matrix(0.01567066,0.99987721,-0.99987721,0.01567066,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan4166"
+         x="165.70232"
+         y="-558.0647"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans">barrelCellHeight</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="292.02911"
+       y="312.32919"
+       id="text4170"><tspan
+         sodipodi:role="line"
+         id="tspan4172"
+         x="292.02911"
+         y="312.32919">dPhi</tspan></text>
+    <text
+       transform="matrix(0.86622532,-0.49965357,0.49965357,0.86622532,0,0)"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
+       x="108.67371"
+       y="501.3486"
+       id="text27125-9"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan27145"
-         x="485.12421"
-         y="117.25639">barrelCellWidth</tspan></text>
-    <text
-       sodipodi:linespacing="125%"
-       id="text27147"
-       y="164.09856"
-       x="218.97304"
-       style="font-size:11.99999332px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
-       xml:space="preserve"
-       transform="matrix(0.9999501,-9.9853906e-3,9.9853906e-3,0.9999501,0,0)"><tspan
-         y="164.09856"
-         x="218.97304"
-         id="tspan27149"
-         sodipodi:role="line">verticlSpacing</tspan></text>
+         id="tspan27127-7"
+         x="108.67371"
+         y="501.3486"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans">outerAnnulusRadius</tspan></text>
   </g>
 </svg>

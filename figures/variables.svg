@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -13,7 +14,7 @@
    height="469.32977"
    id="svg10429"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.47 r22583"
    sodipodi:docname="variables.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/home/einstein/other/jh241/Desktop/docu/variables.png"
@@ -86,9 +87,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
+     inkscape:zoom="1.4"
      inkscape:cx="321.39563"
-     inkscape:cy="660.2451"
+     inkscape:cy="213.75767"
      inkscape:current-layer="layer1"
      showgrid="false"
      showguides="true"
@@ -96,7 +97,8 @@
      inkscape:window-width="1280"
      inkscape:window-height="1005"
      inkscape:window-x="0"
-     inkscape:window-y="0">
+     inkscape:window-y="25"
+     inkscape:window-maximized="0">
     <sodipodi:guide
        orientation="0,1"
        position="131.31983,1155.6145"
@@ -137,7 +139,7 @@
        sodipodi:cy="246.6479"
        sodipodi:rx="43.92857"
        sodipodi:ry="31.428572"
-       d="M 357.1402,246.99436 A 43.92857,31.428572 0 0 1 269.28611,246.78032 L 313.21429,246.6479 z"
+       d="m 357.1402,246.99436 c -0.26745,17.35646 -20.15055,31.27155 -44.41015,31.08021 -23.99864,-0.18929 -43.34281,-14.1236 -43.44394,-31.29425 l 43.92818,-0.13242 z"
        sodipodi:start="0.01102372"
        sodipodi:end="3.1373793"
        transform="matrix(-0.5012629,0,0,0.5603976,542.75045,-49.479322)" />
@@ -412,18 +414,21 @@
          sodipodi:role="line"
          id="tspan19035"
          x="250.51784"
-         y="358.38736">WCIDDiameter</tspan></text>
+         y="358.38736"
+         style="-inkscape-font-specification:Sans;font-family:Sans;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:14">WCIDDiameter</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
-       x="183.84776"
-       y="252.32135"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
+       x="185.61221"
+       y="-180.13957"
        id="text19037"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       transform="matrix(0.01330495,0.99991149,-0.99991149,0.01330495,0,0)"><tspan
          sodipodi:role="line"
          id="tspan19039"
-         x="183.84776"
-         y="252.32135">WDIDHight</tspan></text>
+         x="185.61221"
+         y="-180.13957"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans">WCIDHeight</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
@@ -435,19 +440,21 @@
          sodipodi:role="line"
          id="tspan19043"
          x="138.09322"
-         y="-452.13959">WCBarrelPMTOffset</tspan></text>
+         y="-452.13959"
+         style="-inkscape-font-specification:Sans;font-family:Sans;font-size:14;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">WCBarrelPMTOffset</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
-       x="293.97357"
-       y="-453.05963"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
+       x="241.35626"
+       y="301.57605"
        id="text19045"
        sodipodi:linespacing="125%"
-       transform="matrix(0,1,-1,0,0,0)"><tspan
+       transform="matrix(0.99999479,0.00322691,-0.00322691,0.99999479,0,0)"><tspan
          sodipodi:role="line"
          id="tspan19047"
-         x="293.97357"
-         y="-453.05963">WCPMTExposeHight</tspan></text>
+         x="241.35626"
+         y="301.57605"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans">WCPMTExposeHeight</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
@@ -458,18 +465,20 @@
          sodipodi:role="line"
          id="tspan19051"
          x="365.39227"
-         y="56.833527">WCPMTRadius</tspan></text>
+         y="56.833527"
+         style="font-size:14;-inkscape-font-specification:Sans;font-family:Sans;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">WCPMTRadius</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
-       x="123.24944"
-       y="55.404961"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="128.24945"
+       y="57.547817"
        id="text19053"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan19055"
-         x="123.24944"
-         y="55.404961">WCCapPMTSpaceing</tspan></text>
+         x="128.24945"
+         y="57.547817"
+         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans">WCCapPMTSpacing</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
@@ -480,8 +489,11 @@
          sodipodi:role="line"
          id="tspan19059"
          x="228.96373"
-         y="132.54781"><tspan
-   style="font-size:12px;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
-   id="tspan19061">≤</tspan>WCCapEdgeLimit</tspan></text>
+         y="132.54781"
+         style="font-size:14"><tspan
+           style="font-size:14;font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Ultra-Light"
+           id="tspan19061">≤</tspan><tspan
+           style="-inkscape-font-specification:Sans;font-family:Sans;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+           id="tspan2879">WCCapEdgeLimit</tspan></tspan></text>
   </g>
 </svg>
