@@ -237,15 +237,56 @@ The files \texttt{sample-root-scripts/read\_PMT.C} and \texttt{sample-root-scrip
 The root file itself contains 2 \texttt{TTree}s, each with only 1 branch containing a custom object: \texttt{wcsimT} with branch \texttt{wcsimrootevent} and \texttt{wcsimGeoT} with branch \texttt{wcsimrootgeom}.  The first has an entry corresponding to each GEANT event and contains the truth and hit data, while the second has only 1 entry which contains the geometry information for the simulated detector.  Below is a description of the class hierarchy for these two objects.
 
 \begin{description}
-  \item[WCSimRootEvent] is a container for the observed triggers, accessed via \texttt{GetTrigger(i)}.  It always contains at least 1 trigger (number 0) which contains the information about the initial particle tracks given to GEANT.  If there are delatyed decay particles, these ``sub-events'' are added as additional triggers numbered from 1 onwards.  
+  \item[WCSimRootEvent] is a container for the observed triggers. It always contains at least 1 trigger (number 0) which contains the information about the initial particle tracks given to GEANT.  If there are delatyed decay particles, these ``sub-events'' are added as additional triggers numbered from 1 onwards.  
+  \begin{itemize}
+  \item \texttt{GetTrigger(int i)} - Return trigger number \texttt{i}, a \texttt{WCSimRootTrigger*}
+  \item \texttt{GetNumberOfEvents()} - Total observed triggers
+  \item \texttt{GetNumberOfSubEvents()} - Number of sub-event triggers (\texttt{GetNumberOfEvents()-1})
+  \item \texttt{HasSubEvents()} - Return true if there is more than 1 trigger
+  \end{itemize}
+
   \begin{description}
-    \item[WCSimRootTrigger] contains a header with run and event numbers, the event vertex, and \texttt{TClonesArray}'s of true particle tracks (\texttt{GetTracks()}), true PMT hits in each PMT (\texttt{GetCherenkovHits()}), the true times of all the cherenkov hits (\texttt{GetCherenkovHitTimes()}), and digitized hits e.g. charge read out by the simulated electronics (\texttt{GetCherenkovDigiHits()}).  It also contains methods to access summary information like the number of hits (\texttt{GetNcherenkovdigihits()}) or total charge (\texttt{GetSumQ()}).
+    \item[WCSimRootTrigger] Container for all the information assosciated with a single trigger
+    \begin{itemize}
+    \item \texttt{GetHeader()} - return the header with run and event numbers, etc.
+    \item \texttt{GetPi0Info()} - return Pi0 information if it was set to be stored in the mac file
+    \item \texttt{GetMode()} - interaction mode code number
+    \item \texttt{GetVtx(int i)} - event vertex, 0=x, 1=y, 2=z
+    \item \texttt{GetNpar()} - number of true particles
+
+    \item \texttt{GetNtrack()} - number of true particle tracks
+    \item \texttt{GetTracks()} - TClonesArray of true particle tracks
+
+    \item \texttt{GetNumTubesHit()} - number of tubes with a true hit
+    \item \texttt{GetNcherenkovhits()} - number of true chereknov hits
+    \item \texttt{GetCherenkovHits()} - true PMT hits in each PMT
+    \item \texttt{GetCherenkovHitTimes()} - the true times of all the cherenkov hits 
+
+    \item \texttt{GetNcherenkovdigihits()} - number of digitized hits
+    \item \texttt{GetSumQ()} - sum of digitized charge
+    \item \texttt{GetCherenkovDigiHits()} - digitized hits e.g. charge read out by the simulated electronics 
+    \end{itemize}
+
     \begin{description}
       \item[WCSimRootHeader] is a simple container for the run number, event number, and date of the event.
       \item[WCSimRootTrack] is a true track of a particles generated in the simulation. It contains all the information about the track, like particle species, mass, momentum, the start and top volumes, and the parent species.  In each trigger the number of tracks is given by \texttt{GetNTrack()}.  %Each track contains the methods: \volume{GetIpnu()}, \volume{GetFlag()}, \volume{GetM()}, \volume{GetP()}, \volume{GetE()}, \volume{GetStartvol()}, \volume{GetStopvol()}, \volume{GetDir(i)}, \volume{GetPdir(i)}, \volume{GetStop(i)}, \volume{GetStart(i)}, \volume{GetParenttype(i)}, \volume{GetTime()}, \volume{GetId()}.
-      \item[WCSimRootCherenkovHit] These hits are records of photons hitting the PMTs before the digitization step (and associated threshold, etc.).  It contains the ID of the hit tube, and has a two-element PE variable.  \texttt{GetTotalPe(0)} returns the position in the array of HitTimes and \texttt{GetTotalPe(1)} returns the number of photons that hit this PMT, which is also the number of entries in that list that belong to this PMT.  In each trigger the number of true cherenkov hits is given by \texttt{GetNcherenkovhits()}.
+      \item[WCSimRootCherenkovHit] These hits are records of photons hitting the PMTs before the digitization step (and associated threshold, etc.). In each trigger the number of true cherenkov hits is given by \texttt{GetNcherenkovhits()}.
+          \begin{itemize}
+          \item \texttt{GetTotalPe(0)} - the position in the array of HitTimes
+          \item \texttt{GetTotalPe(1)} - the number of true photons that hit this PMT, which is also the number of entries in that list that belong to this PMT
+          \item \texttt{GetTubeID()} - tube id number
+          \end{itemize}
       \item[WCSimRootCherenkovHitTime] This list stores the true time and parent ids of each cherenkov photon.  So, by looking up the photons assosciated with a particular PMT as above, the particles which contributed light to a particular phototube can be determined.
-      \item[WCSimRootCherenkovDigiHit] These hits are the final output of the simulation. It contains teh total charge output of the PMT, the time of the hit, and the ID of the hit tube.  In each trigger the number of true cherenkov hits is given by \texttt{GetNcherenkovdigihits()}.
+          \begin{itemize}
+          \item \texttt{GetTruetime()} - true time of the hit
+          \item \texttt{GetParentID()} - ID number of parent, allowing each photon to be traced to a specific true particle
+          \end{itemize}
+      \item[WCSimRootCherenkovDigiHit] These hits are the final output of the simulation. In each trigger the number of digitized hits is given by \texttt{GetNcherenkovdigihits()}.  The charge and time variables are those returned by the simulated electronics.
+          \begin{itemize}
+          \item \texttt{GetQ()} - the total charge measured by the PMT
+          \item \texttt{GetT()} - the measured time of the hit
+          \item \texttt{GetTubeId()} - ID number of the PMT
+          \end{itemize}
     \end{description}
   \end{description}
 \end{description}
@@ -255,12 +296,12 @@ The root file itself contains 2 \texttt{TTree}s, each with only 1 branch contain
   \item[WCSimRootGeom]  has methods \texttt{GetWCCylRadius()}, \texttt{GetWCCylLength()}, \texttt{GetWCPMTRadius()} and \texttt{GetWCNumPMT()}, which return, respectively, the radius and length of the detector cylinder, the PMT radius, and the total number of PMTs.  The class can also return PMT objects by tube number via \texttt{GetPMT(i)}.
     \begin{description}
     \item[WCSimRootPMT] contains information for each PMT in the detector.
-    	\begin{description}
-                \item[GetTubeNo()], the tube ID.
-		\item[GetCylLoc()], 0 for a PMT on the top cap, 2 for a PMT on the bottom  cap, and 1 for a PMT for a wall PMT.
-		\item[GetPosition(j)], where j is 0, 1, or 2.  Returns the x, y, and z coordinates of the center of the sphere that forms the PMT.
-		\item[GetOrientation(j)], where j is 0, 1, or 2.  Returns the x, y, and z components of the vector describing the direction the PMT faces.
-        \end{description}
+    	\begin{itemize}
+                \item \texttt{GetTubeNo()} - the tube ID.
+		\item \texttt{GetCylLoc()} - 0 for a PMT on the top cap, 2 for a PMT on the bottom  cap, and 1 for a PMT for a wall PMT.
+		\item \texttt{GetPosition(j)} - where j is 0, 1, or 2.  Returns the x, y, and z coordinates of the center of the sphere that forms the PMT.
+		\item \texttt{GetOrientation(j)} - where j is 0, 1, or 2.  Returns the x, y, and z components of the vector describing the direction the PMT faces.
+         \end{itemize}
     \end{description}
 \end{description}
 
