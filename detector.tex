@@ -88,7 +88,7 @@ This section describes the the volumes that make up the detector. (Figure \ref{f
 
 \section{Setup your own detector}
 
-The dimensions of the detector to be setup must be described in member variables of  \texttt{WCSimDetectorConstruction} before calling  \texttt{WCSimDetectorConstruction::ConstructWC()}. This section describes which geometric parameters must be set. The easiest and least error-prone way to to set the variables is to add a method to the \texttt{WCSimDetectorConstruction} class that sets all variables, then define the method at the beginning of \srcfile{ConstructWC.cc}.
+The dimensions of the detector to be setup must be described in member variables of  \texttt{WCSimDetectorConstruction} before calling  \texttt{WCSimDetectorConstruction::ConstructWC()}. This section describes which geometric parameters must be set. The easiest and least error-prone way to to set the variables is to add a method to the \texttt{WCSimDetectorConfigs.cc} file that is a copy of an existing detector configuration with the necessary changes.
 You can either call this function in the constructor of \texttt{WCSimDetectorConstruction} or add it to the detector messenger (\srcfile{DetectorMessenger.cc}) if you want call it in a macro file or you want to change the detector setup dynamically. If you want to do this, you first have to use the command that calls your function (\texttt{/WCSim/WCgeom <geometry name>}) to set the parameters, and afterwards the detector construction command (\texttt{/WCSim/Construct}) to (re)construct the geometry.
 
 \subsection{Parameters}\label{sec:param}
