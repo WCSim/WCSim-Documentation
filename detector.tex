@@ -259,9 +259,9 @@ The root file itself contains 2 \texttt{TTree}s, each with only 1 branch contain
     \item \texttt{GetTracks()} - TClonesArray of true particle tracks
 
     \item \texttt{GetNumTubesHit()} - number of tubes with a true hit
-    \item \texttt{GetNcherenkovhits()} - number of true chereknov hits
-    \item \texttt{GetCherenkovHits()} - true PMT hits in each PMT
-    \item \texttt{GetCherenkovHitTimes()} - the true times of all the cherenkov hits 
+    \item \texttt{GetNcherenkovhits()} - number of true chereknov hits (quantum efficiency is already applied)
+    \item \texttt{GetCherenkovHits()} - true PMT hits in each PMT (quantum efficiency is already applied)
+    \item \texttt{GetCherenkovHitTimes()} - the true times of all the cherenkov hits (quantum efficiency is already applied)
 
     \item \texttt{GetNcherenkovdigihits()} - number of digitized hits
     \item \texttt{GetSumQ()} - sum of digitized charge
