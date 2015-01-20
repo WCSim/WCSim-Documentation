@@ -12,7 +12,7 @@
 
 \section{Overview}
 
-WCSim is a flexibile Geant4-based simulation of a water-Cherenkov detector with top and side photo-multiplier tubes.  Given basic parameters about the detector, it automatically lays out the PMTs so you can get started simulating events as soon as possible.  This document will describe the detector geometry and all its elements.  It describes how to set up a new custom detector and how to configure the simulation options.  Finally, it describes the ROOT output file and how to access the stored data with some simple examples.
+WCSim is a flexible Geant4-based simulation of a water-Cherenkov detector with top and side photo-multiplier tubes.  Given basic parameters about the detector, it automatically lays out the PMTs so you can get started simulating events as soon as possible.  This document will describe the detector geometry and all its elements.  It describes how to set up a new custom detector and how to configure the simulation options.  Finally, it describes the ROOT output file and how to access the stored data with some simple examples.
 
 
 \section{The WCSim Geometry}
@@ -51,14 +51,14 @@ This section describes the the volumes that make up the detector. (Figure \ref{f
         \item[WCTopCapAssembly and WCBottomCapAssembly] are two mirrored volumes that close the ends of the barrel.  They are constructed by calling \srcfile{WCSimDetectorConstruction::ConstructCaps(G4int zflip)}, where the argument, zflip, equals 1 to generate the \volume{BottomCapAssembly} and -1 to generate the \volume{TopCapAssembly}.  This method allows symmetric changes to the caps by editing ConstructCaps and avoids using Geant's built-in ReflectionFactory, which is incompatible with the OpticalSurface used to model certain PMT properties.
         \begin{description}
           \item[WCCap] This volume contains all of the cap PMTs (\volume{WCPMT}) and the blacksheet behind them (\volume{WCCapBlackSheet}) which extends around the cylinder edges to connect to:
-          \item[WCBarrelBorderRing] This volume connects the annulus to the cap.  It is essentialy the uppermost (or lowermost) ring of PMTs, but has a modified  bounding-box geometry and is contained in the CapAssembly because it must mate at the corner with the caps.  (N.B.  See \ref{sec:warnings}, for information on corner geometry.)  The border ring is divided into cells:
+          \item[WCBarrelBorderRing] This volume connects the annulus to the cap.  It is essentially the uppermost (or lowermost) ring of PMTs, but has a modified  bounding-box geometry and is contained in the CapAssembly because it must mate at the corner with the caps.  (N.B.  See \ref{sec:warnings}, for information on corner geometry.)  The border ring is divided into cells:
           \begin{description}
             \item[WCBarrelBorderCell] that contain the same number of PMTs (\volume{WCPMT}) and the same blacksheet (\volume{WCBarrelCellBS}) as the normal annulus cells.
           \end{description}
         \end{description}
         \item[WCExtraTower] is a tower that is narrower than the normal cells that is added if the number of PMTs circumferentially is not divisible by the number of PMTs horizontally in each cell.  It is divided into cells:
         \begin{description}
-            \item[WCExtraTowerCell] that contains the remaining PMTs (\volume{WCPMT}) and blacksheet  (\volume{WCTowerBlackSheet}) (figure \ref{fig:extra}).  The cap assemblies conatin a corresponding this corresponding extra cell called \volume{WCExtraBorderCell}.
+            \item[WCExtraTowerCell] that contains the remaining PMTs (\volume{WCPMT}) and blacksheet  (\volume{WCTowerBlackSheet}) (figure \ref{fig:extra}).  The cap assemblies contain a corresponding this corresponding extra cell called \volume{WCExtraBorderCell}.
         \end{description}
       \end{description}
     \end{description}
@@ -104,9 +104,9 @@ To set up a new detector geometry the following parameters must be set:
 
 
 \begin{description}
-\item[PMTName] selects a PMT quantum efficiency model.  Supported names are "10inch", "10inchHQE" and "20inch".
+\item[CreatePMTObject("PMTType")] instantiates a PMT of type PMTType as defined in the WCSimPMTObject.cc file. This function also returns the pointer to the PMTObject and stores the pointer in memory to be accessed by other files which use the PMT properties (for example, the pe conversion in WCSimWCPMT.cc). The current options are PMTType = PMT8inch, PMT10inch, PMT10inchHQE, PMT12inchHQE, PMT20inch, or HPD20inchHQE. 
 
-\item[WCPMTRadius, WCPMTExposeHeight] (see figure \ref{fig:pmt}) are the radius at blacksheet and height above blacksheet, respectively, of the PMTs. Note that the digitizer recognizes PMT models by radius to determine a timing constant, so diameter configuration is limited to know sizes. Supported diameters are 8, 10, 12 and 20 inches (1016, 1270, 1524 and 2540 mm radii, respectively).
+\item[WCPMTRadius, WCPMTExposeHeight] (see figure \ref{fig:pmt}) are the radius at blacksheet and height above blacksheet, respectively, of the PMTs. This information is retrieved using the pointer that is returned by CreatePMTObject.
 
 \begin{figure}
   \begin{center}
@@ -114,6 +114,8 @@ To set up a new detector geometry the following parameters must be set:
   \end{center}
 \caption{The PMTs are segments of spheres.  All parts are contained in the bounding cylinder, \volume{WCPMT} (red).  The PMT glass (\volume{GlassFaceWCPMT}, blue) and the sensitive volume, the inner vacuum (\volume{InteriorWCPMT}, green) are contained within. Also present is the optical coating between the glass and vacuum (\volume{GlassCathodeSurface}, yellow).  To define the geometry of the PMTs you need to set the \texttt{WCPMTGlassThickness}, the \texttt{WCPMTRadius}, and the \texttt{WCPMTExposeHight}}\label{fig:pmt}
 \end{figure}
+
+\item[WCPMTGlassThickness] the thickness of the glass face. This information is retrieved using the pointer that is returned by CreatePMTObject.
 
 \item[WCIDDiameter, WCIDHeight] These two variables are used to setup the size of the detector. The height is the distance between the inner surfaces of the top and bottom blacksheets and the diameter is two times the shortest distance between the inner surface of the wall blacksheet and the center of the detector (see figure \ref{fig:geom}).  This shortest radius occurs at the center of normal (not extra) cells, and is perpendicular to the blacksheet.
 
@@ -129,8 +131,6 @@ To set up a new detector geometry the following parameters must be set:
 
 \item[WCCapEdgeLimit] is the maximum distance between the center of the cap and the outer edge of a cap PMT (the edge is WCPMTRadius away from the center of the PMT, whose coordiantes on the cap are half-integer multipules of WCCapPMTSpacing). This length has to be smaller than half the \texttt{WCIDDiameter}. Otherwise there may be PMTs that intersect the edge of the caps.  The WCSimConstructWC places PMTs on the caps in a grid subject only to this constraint.  Note that the four centermost cap PMTs are equidistant from the cylinder axis.
 
-\item[WCPMTGlassThickness] the thickness of the glass face.
-
 \item[WCBlackSheetThickness] the thickness of the blacksheet.
 
 \item[WCAddGd] a boolean that, when true, dopes the water volume with .01\% Gadolinium by mass.
@@ -143,9 +143,11 @@ All other values needed to set up the geometry are derived from these variables.
 \begin{lstlisting}
 void WCSimDetectorConstruction::SetSuperKGeometry()
 {
-  WCPMTName             ="20inch";
-  WCPMTRadius           =.254*m;  
-  WCPMTExposeHeight     =.18*m; 
+  WCSimPMTObject * PMT = CreatePMTObject("PMT20inch"); 
+  WCPMTName = PMT->GetPMTName();
+  WCPMTExposeHeight = PMT->GetExposeHeight();
+  WCPMTRadius = PMT->GetRadius();
+  WCPMTGlassThickness = PMT->GetPMTGlassThickness();      
   WCIDDiameter          = 33.6815*m;//16.900*2*
                                     //cos(2*pi*rad/75)*m;
   WCIDHeight            = 36.200*m;
@@ -157,15 +159,14 @@ void WCSimDetectorConstruction::SetSuperKGeometry()
   WCCapPMTSpacing       = 0.707*m; // distance between centers
                                    // of top and bottom pmts
   WCCapEdgeLimit        = 16.9*m;
-  WCPMTGlassThickness   = .4*cm;
   WCBlackSheetThickness = 2.0*cm;
   WCAddGd               = false;
 }
 \end{lstlisting}
 
-This is the Super-K setup. This method is located at the beginning of \srcfile{ConstructWC.cc}. It is called in the constructor of \texttt{WCSimDetectorConstruction}.
+This is the Super-K setup. This method is located at the beginning of \srcfile{WCSimDetectorConfigs.cc}. It is called in the constructor of \texttt{WCSimDetectorConstruction}.
 In SK the PMTs are arranged in $4 \times 3$ cells (\texttt{WCPMTperCellHorizontal} and \texttt{WCPMTperCellVertical}). 
-All in all there are 51 rings of PMTs (3 lines in each cell times 17 lines of cells (\texttt{WCBarrelNRings})). Each line contains 150 PMTs (\texttt{WCBarrelNumPMTHorizontal}). As 150 divided by 4 is 37.5, there are 37 regular $4 \times 3$ cells and one $2 \times 3$ cell in one ring.  Note that Super-K's plans specify a 16.9 meter radius to the corner between cells, some triginometry was required to translate this to a perpendicular distance, almost 6 cm less.
+All in all there are 51 rings of PMTs (3 lines in each cell times 17 lines of cells (\texttt{WCBarrelNRings})). Each line contains 150 PMTs (\texttt{WCBarrelNumPMTHorizontal}). As 150 divided by 4 is 37.5, there are 37 regular $4 \times 3$ cells and one $2 \times 3$ cell in one ring.  Note that Super-K's plans specify a 16.9 meter radius to the corner between cells, some trigonometry was required to translate this to a perpendicular distance, almost 6 cm less.
 
 The vertical spacing of the PMTs is
 \[
@@ -204,11 +205,10 @@ Some rules of thumb to avoid overlaps are: \texttt{WCBarrelPMTOffset > WCPMTExpo
 
 \subsection{Input Files}
 
-Some tuning paramters are found in \texttt{jobOptions.mac} and \texttt{tuning\_parameters.mac}, which are in seperate files because they must be loaded at specific times during initialization.  The bulk of options, however, may be found in \texttt{vis.mac}, the default inupt file.  WCSim is a GEANT4 program  and accepts GEANT4 commands as an input file or at runtime.  GEANT documentation describes the commands not detailed here.
+Some tuning parameters are found in \texttt{jobOptions.mac} and \texttt{tuning\_parameters.mac}, which are in seperate files because they must be loaded at specific times during initialization.  The bulk of options, however, may be found in \texttt{vis.mac}, the default inupt file.  WCSim is a GEANT4 program  and accepts GEANT4 commands as an input file or at runtime.  GEANT documentation describes the commands not detailed here.
 \begin{description}
 \item[/WCSim/WCgeom] selects a set of geometry parameters (see \ref{sec:param}.)  It does not create a new geometry.  Availible arguments include \texttt{SuperK} and \texttt{DUSEL\_200kton\_12inch\_HQE\_10perCent}.  New geometries are easily added and a full list of those already available may be found in \srcfile{DetectorMessenger.cc}
 \item[/WCSim/Construct] constructs the detector geometry in memory based on the previously selected parameters.  Takes no arguments.
-\item[/WCSim/WCPMTsize] options are \texttt{10inch} and \texttt{20inch}.  Refers to models of PMT quantum efficieny.
 \item[/WCSim/PMTQEMethod] Selects the quantum efficiency method. Possible arguments are: \texttt{Stacking\_Only}, in which the QE is applied to reduce the total number of photons when the photons are generated; \texttt{Stacking\_And\_SensitiveDetector}, which the (constant) QE at the most efficient wavelength is applied at photon creation, then the remaining (wavelength-dependent) loss is applied at the detector; and \texttt{SensitiveDetector\_Only}, in which QE is applied at the detector only.
 \item[/WCSim/PMTCollEff] Selects wavelength-dependent (\texttt{on}) or -independent (\texttt{off}) quantum efficiency model.
 \item[/WCSim/SavePi0] Selects whether or not Pi0-specific information is saved, options are \texttt{true} and \texttt{false}.
