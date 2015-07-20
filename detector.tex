@@ -1,5 +1,5 @@
 \input{preamble}
-\author{Alexander Himmel, Johannes Hoppenau, Joseph Lozier}
+\author{Thomas Dealtry, Alexander Himmel, Johannes Hoppenau, Joseph Lozier}
 \title{Simulating Water Cherenkov Detectors Using \texttt{WCSim}}
 
 \graphicspath{ {figures/} }
@@ -216,6 +216,89 @@ Some tuning parameters are found in \texttt{jobOptions.mac} and \texttt{tuning\_
 \end{description}
 
 
+
+\section{DAQ classes - for dark noise, digitization, and triggering}
+
+\subsection{WCSimWCAddDarkNoise}
+\label{sec:daq:darknoise}
+
+In order for the effect of dark noise to be included correctly in the simulation it must be added throughout the time of the event. The easiest way to do this would be to add dark noise in a large window that is sure to incorporate any late activity (e.g. Michel electrons). Unfortunately this is computationally expensive, so this class has various options to add the dark noise only at relevant times.
+\begin{description}
+\item[In a predefined absolute time window] Set the first/last time and fill in the area in-between with dark noise.
+\item[In a predefined time window around each hit] Set the duration of the window.
+\end{description}
+The optimal mode and values need to be tuned to each simulation type (e.g. electron particle gun, muon particle gun, beam, atmospherics, ...).
+
+\subsection{WCSimWCDigitizer*}
+\label{sec:daq:digitizer}
+
+This part of the code uses a base class (\texttt{WCSimWCDigitizerBase}), and concrete implementations (e.g. \texttt{WCSimWCDigitizerSK}). The purpose of the class is to take an input \texttt{WCSimWCDigitsCollection} (``WCRawPMTSignalCollection'', the collection of hits including dark noise) and output a \texttt{WCSimWCDigitsCollection} (``WCDigitizedStoreCollection'', the collection of digits). In this, a ``hit'' is a photoelectron (from a Cherenkov photon or dark noise) depositing charge on a PMT, and  a ``digit'' is an integration of photons which includes electronics threshold effects.
+
+In order to implement your own digitizer class, you must create your own class derived from \texttt{WCSimWCDigitizerBase} and implement the following:
+\begin{description}
+\item[void DigitizeHits(WCSimWCDigitsCollection*)] 
+\item[static void Threshold(double\& pe, int\& iflag)] 
+\end{description}
+If your new class has any options (e.g. integration time, deadtime, ...) these options should be added to \texttt{WCSimWCDigitizerBase} and not the derived class. This is due to the way that the options are read in.
+
+The complete steps to add a new digitizer class are as follows:
+\begin{itemize}
+\item Create the new class, derived from \texttt{WCSimWCDigitizerBase}.
+\item Add the creation of the new digitizer class to the WCSimEventAction constructor.
+\item If there are any new-digitizer-specific options:
+  \begin{itemize}
+  \item Add the new parameters to the \texttt{WCSimWCDigitizerBase} class, including set methods.
+  \item Add the new options to the \texttt{WCSimWCDAQMessenger} class, including calls to the new \texttt{WCSimWCDigitizerBase} set methods.
+  \item Document the new options in this document, and in \texttt{jobOptions.mac}.
+  \end{itemize}
+\end{itemize}
+
+
+\subsection{WCSimWCTrigger*}
+\label{sec:daq:trigger}
+
+This part of the code uses a base class (\texttt{WCSimWCTriggerBase}), and concrete implementations (e.g. \texttt{WCSimWCTriggerNHits}). The purpose of the class is to take an input \texttt{WCSimWCDigitsCollection} (``WCDigitizedStoreCollection'', the collection of digits) and output a \texttt{WCSimWCDigitsCollection} (``WCDigitizedCollection'', the collection of triggered digits), and a series of \texttt{vector}'s with the trigger times, trigger types, and extra trigger information.
+
+In order to implement your own trigger class, you must create your own class derived from \texttt{WCSimWCTriggerBase} and implement the following:
+\begin{description}
+\item[void DoTheWork(WCSimWCDigitsCollection*)] Calls the relevant trigger algorithm(s). If calling multiple algorithms, also handles the creation/deletion of intermediate \texttt{WCSimWCDigitsCollection}'s.
+\item[void Alg*(WCSimWCDigitsCollection*)] Your new algorithm. Should fill the \texttt{vector}'s: \texttt{TriggerTimes}, \texttt{TriggerTypes}, \texttt{TriggerInfos} with relevant information. Currently all algorithms are added to \texttt{WCSimWCTriggerBase} in order for new triggers to use multiple algorithms without copying code.
+\end{description}
+If your new class has any options (e.g. threshold, ...) these options should be added to \texttt{WCSimWCTriggerBase} and not the derived class. This is due to the way that the options are read in.
+
+The complete steps to add a new trigger class are as follows:
+\begin{itemize}
+\item Add the new algorithm to \texttt{WCSimWCTriggerBase}.
+\item Add the new trigger type to \texttt{WCSimEnumerations.hh} (if applicable).
+\item Create the new class, derived from \texttt{WCSimWCTriggerBase}.
+\item Add the creation of the new trigger class to the WCSimEventAction constructor.
+\item If there are any new-trigger-specific options:
+  \begin{itemize}
+  \item Add the new parameters to the \texttt{WCSimWCTriggerBase} class, including set methods.
+  \item Add the new options to the \texttt{WCSimWCDAQMessenger} class, including calls to the new \texttt{WCSimWCTriggerBase} set methods.
+  \item Document the new options in this document, and in \texttt{jobOptions.mac}.
+  \end{itemize}
+\end{itemize}
+
+\subsection{Input files}
+\label{sec:daq:options}
+
+The options to choose the digitizer and trigger classes are specified in \texttt{jobOptions.mac} because they must be loaded earlier during initialization.
+\begin{description}
+\item[/DAQ/Digitizer] selects the digitizer to use. Available arguments include \texttt{SKI} and \texttt{SKIV}. New digitizers are easily added and a full list of those already available may be found in \srcfile{WCSimWCDAQMessenger.cc}.
+\item[/DAQ/Trigger] selects the trigger(s) to use. Available arguments include \texttt{NHits}. New triggers are easily added and a full list of those already available may be found in \srcfile{WCSimWCDAQMessenger.cc}.
+\item[/DAQ/TriggerNHits/Threshold] selects the threshold number of hits for the NHits trigger. The default is 25.
+\item[/DAQ/TriggerNHits/Window] selects the time window to apply the NHits trigger to. The default is 200 ns.
+\end{description}
+Dark noise options may be chosen in \texttt{vis.mac}, the default inupt file.
+\begin{description}
+\item[/DarkRate/SetDarkRate] selects the dark noise rate. Common values are 0 kHz (i.e. off), 4.2 kHz (SKDETSIM SKI default), and 8.4 kHz (20'' HPDs and box and line PMTs).
+\item[/DarkRate/SetConvert] converts dark noise frequency before digitization to after digitization by setting suitable factor. Common values are 1.367 (normal PMTs), 1.120 (HPDs), 1.126 (box and line PMTs).
+\item[/DarkRate/SetDarkMode] selects how to add dark noise. Allowed options are 0: adds dark noise in range /DarkRate/SetDarkLow to /DarkRate/SetDarkHigh; 1: adds dark noise in a $\pm$(/DarkRate/SetDarkWindow)/2 window around each hit.
+\item[/DarkRate/SetDarkLow] When using dark mode 0, add dark noise in a window starting at this value.
+\item[/DarkRate/SetDarkHigh] When using dark mode 0, add dark noise in a window ending at this value.
+\item[/DarkRate/SetDarkWindow] When using dark mode 1, add dark noise in a $\pm$(/DarkRate/SetDarkWindow)/2 window around each hit.
+\end{description}
 
 \section{Output Root File}
 
