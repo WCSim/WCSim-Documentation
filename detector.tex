@@ -245,6 +245,7 @@ The complete steps to add a new digitizer class are as follows:
 \begin{itemize}
 \item Create the new class, derived from \texttt{WCSimWCDigitizerBase}.
 \item Add the creation of the new digitizer class to the WCSimEventAction constructor.
+\item Add the new option to the list of allowed digitizers in \texttt{WCSimWCDAQMessenger} (there are 2 places in the code to add this!). 
 \item If there are any new-digitizer-specific options:
   \begin{itemize}
   \item Add the new parameters to the \texttt{WCSimWCDigitizerBase} class, including set methods.
@@ -271,6 +272,7 @@ The complete steps to add a new trigger class are as follows:
 \item Add the new algorithm to \texttt{WCSimWCTriggerBase}.
 \item Add the new trigger type to \texttt{WCSimEnumerations.hh} (if applicable).
 \item Create the new class, derived from \texttt{WCSimWCTriggerBase}.
+\item Add the new option to the list of allowed triggers in \texttt{WCSimWCDAQMessenger} (there are 2 places in the code to add this!). 
 \item Add the creation of the new trigger class to the WCSimEventAction constructor.
 \item If there are any new-trigger-specific options:
   \begin{itemize}
@@ -289,12 +291,26 @@ The options to choose the digitizer and trigger classes are specified in \texttt
 \item[/DAQ/Trigger] selects the trigger(s) to use. Available arguments include \texttt{NHits}. New triggers are easily added and a full list of those already available may be found in \srcfile{WCSimWCDAQMessenger.cc}.
 \item[/DAQ/TriggerNHits/Threshold] selects the threshold number of hits for the NHits trigger. The default is 25.
 \item[/DAQ/TriggerNHits/Window] selects the time window to apply the NHits trigger to. The default is 200 ns.
+\item[/DAQ/TriggerNHits/AdjustForNoise] specifies whether the NHits threshold should be automatically increased to take account of the average dark noise rate. The default is false.
+\item[/DAQ/TriggerSaveFailures/Mode] selects which triggers to save. Allowed options are:
+  \begin{enumerate}
+  \item [0.]\setcounter{enumi}{0} Save only events which pass triggers;
+  \item Save both events which pass triggers, and events which fail triggers (with a dummy trigger time);
+  \item Save only events which fail triggers (with a dummy trigger time).
+  \end{enumerate}
+The default mode is 0.
+\item[/DAQ/TriggerSaveFailures/TriggerTime] selects the dummy trigger time for events which fail all triggers. The default is 100 ns.
 \end{description}
 Dark noise options may be chosen in \texttt{vis.mac}, the default inupt file.
 \begin{description}
 \item[/DarkRate/SetDarkRate] selects the dark noise rate. Common values are 0 kHz (i.e. off), 4.2 kHz (SKDETSIM SKI default), and 8.4 kHz (20'' HPDs and box and line PMTs).
 \item[/DarkRate/SetConvert] converts dark noise frequency before digitization to after digitization by setting suitable factor. Common values are 1.367 (normal PMTs), 1.120 (HPDs), 1.126 (box and line PMTs).
-\item[/DarkRate/SetDarkMode] selects how to add dark noise. Allowed options are 0: adds dark noise in range /DarkRate/SetDarkLow to /DarkRate/SetDarkHigh; 1: adds dark noise in a $\pm$(/DarkRate/SetDarkWindow)/2 window around each hit.
+\item[/DarkRate/SetDarkMode] selects how to add dark noise. Allowed options are:
+  \begin{enumerate}
+  \item [0.]\setcounter{enumi}{0} Adds dark noise in range /DarkRate/SetDarkLow to /DarkRate/SetDarkHigh;
+  \item Adds dark noise in a $\pm$(/DarkRate/SetDarkWindow)/2 window around each hit.
+  \end{enumerate}
+The default mode is 1.
 \item[/DarkRate/SetDarkLow] When using dark mode 0, add dark noise in a window starting at this value.
 \item[/DarkRate/SetDarkHigh] When using dark mode 0, add dark noise in a window ending at this value.
 \item[/DarkRate/SetDarkWindow] When using dark mode 1, add dark noise in a $\pm$(/DarkRate/SetDarkWindow)/2 window around each hit.
