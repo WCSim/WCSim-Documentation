@@ -283,7 +283,7 @@ In order to implement your own trigger class, you must create your own class der
 \end{description}
 The following default values of trigger options can also be implemented, if an NDigits-like trigger is used in the class:
 \begin{description}
-\item[int GetDefaultRestrictDigitsPerTrigger()]
+\item[int GetDefaultMultiDigitsPerTrigger()]
 \item[int GetDefaultNDigitsWindow()]
 \item[int GetDefaultNDigitsThreshold()]
 \item[int GetDefaultNDigitsPreTriggerWindow()]
@@ -322,7 +322,7 @@ The options to choose the trigger class are specified in \texttt{(no)vis.mac}, t
 \begin{description}
 \item[/DAQ/Trigger] selects the trigger class to use. Available arguments include \texttt{NDigits}. New triggers are easily added and a full list of those already available may be found in \srcfile{WCSimWCDAQMessenger.cc}.
 
-\item[/DAQ/RestrictDigitsPerTrigger] specifies whether to restrict the saved digits in a trigger to the first on a PMT, or allow multiple digits per PMT per trigger. The default is class specific (for NDigits it is true).
+\item[/DAQ/MultiDigitsPerTrigger] specifies whether to allow multiple digits per PMT per trigger, or restrict the saved digits in a trigger to the first on a PMT. The default is class specific (for NDigits it is false).
 
 \item[/DAQ/TriggerNDigits/Threshold] selects the threshold number of hits for the NDigits trigger. The default is class specific (for NDigits it is 25).
 \item[/DAQ/TriggerNDigits/Window] selects the time window to apply the NDigits trigger to. The default is class specific (for NDigits it is 200 ns).
