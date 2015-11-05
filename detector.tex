@@ -129,7 +129,7 @@ To set up a new detector geometry the following parameters must be set:
 
 \item[WCCapPMTSpacing] defines the center-to-center spacing of the PMTs on the top and the bottom caps of the detector.
 
-\item[WCCapEdgeLimit] is the maximum distance between the center of the cap and the outer edge of a cap PMT (the edge is WCPMTRadius away from the center of the PMT, whose coordiantes on the cap are half-integer multipules of WCCapPMTSpacing). This length has to be smaller than half the \texttt{WCIDDiameter}. Otherwise there may be PMTs that intersect the edge of the caps.  The WCSimConstructWC places PMTs on the caps in a grid subject only to this constraint.  Note that the four centermost cap PMTs are equidistant from the cylinder axis.
+\item[WCCapEdgeLimit] is the maximum distance between the center of the cap and the outer edge of a cap PMT (the edge is WCPMTRadius away from the center of the PMT, whose coordinates on the cap are half-integer multipules of WCCapPMTSpacing). This length has to be smaller than half the \texttt{WCIDDiameter}. Otherwise there may be PMTs that intersect the edge of the caps.  The WCSimConstructWC places PMTs on the caps in a grid subject only to this constraint.  Note that the four centermost cap PMTs are equidistant from the cylinder axis.
 
 \item[WCBlackSheetThickness] the thickness of the blacksheet.
 
@@ -205,9 +205,9 @@ Some rules of thumb to avoid overlaps are: \texttt{WCBarrelPMTOffset > WCPMTExpo
 
 \subsection{Input Files}
 
-Some tuning parameters are found in \texttt{jobOptions.mac} and \texttt{tuning\_parameters.mac}, which are in seperate files because they must be loaded at specific times during initialization.  The bulk of options, however, may be found in \texttt{vis.mac}, the default inupt file.  WCSim is a GEANT4 program  and accepts GEANT4 commands as an input file or at runtime.  GEANT documentation describes the commands not detailed here.
+Some tuning parameters are found in \texttt{jobOptions.mac} and \texttt{tuning\_parameters.mac}, which are in separate files because they must be loaded at specific times during initialization.  The bulk of options, however, may be found in \texttt{vis.mac}, the default input file.  WCSim is a GEANT4 program  and accepts GEANT4 commands as an input file or at runtime.  GEANT documentation describes the commands not detailed here.
 \begin{description}
-\item[/WCSim/WCgeom] selects a set of geometry parameters (see \ref{sec:param}.)  It does not create a new geometry.  Availible arguments include \texttt{SuperK} and \texttt{DUSEL\_200kton\_12inch\_HQE\_10perCent}.  New geometries are easily added and a full list of those already available may be found in \srcfile{DetectorMessenger.cc}
+\item[/WCSim/WCgeom] selects a set of geometry parameters (see \ref{sec:param}.)  It does not create a new geometry.  Available arguments include \texttt{SuperK} and \texttt{DUSEL\_200kton\_12inch\_HQE\_10perCent}.  New geometries are easily added and a full list of those already available may be found in \srcfile{DetectorMessenger.cc}
 \item[/WCSim/Construct] constructs the detector geometry in memory based on the previously selected parameters.  Takes no arguments.
 \item[/WCSim/PMTQEMethod] Selects the quantum efficiency method. Possible arguments are: \texttt{Stacking\_Only}, in which the QE is applied to reduce the total number of photons when the photons are generated; \texttt{Stacking\_And\_SensitiveDetector}, which the (constant) QE at the most efficient wavelength is applied at photon creation, then the remaining (wavelength-dependent) loss is applied at the detector; and \texttt{SensitiveDetector\_Only}, in which QE is applied at the detector only.
 \item[/WCSim/PMTCollEff] Selects wavelength-dependent (\texttt{on}) or -independent (\texttt{off}) quantum efficiency model.
@@ -368,7 +368,7 @@ The default mode is 1.
 
 WCSim writes the results of the simulation in a root file. You can set the name and path of this file in the \texttt{vis.mac} file using the \texttt{/WCSimIO/RootFile} command.  To read from the root file, the command \texttt{gSystem.Load("<\emph{WCSim Directory}>/libWCSimRoot.so")} should be run in root to load shared classes.  This shared object library is created by running "gmake shared" on the command line.
 
-A typical analysis will loop through events (one per simulated initial vertex), and in each event loop through the observed triggers (sually one for the initial particles and sometimes additional triggers for delayed decay products).  In each tigger, you access a list of digitized hits, each containing the charge, time, and ID of the hit PMT.  To get the location of the hit, you use the geometry object to access the PMT object that corresponds to that Tube ID.  This structure avoids having to store a list containing every PMT in every sub-event.
+A typical analysis will loop through events (one per simulated initial vertex), and in each event loop through the observed triggers (usually one for the initial particles and sometimes additional triggers for delayed decay products).  In each tigger, you access a list of digitized hits, each containing the charge, time, and ID of the hit PMT.  To get the location of the hit, you use the geometry object to access the PMT object that corresponds to that Tube ID.  This structure avoids having to store a list containing every PMT in every sub-event.
 
 The files \texttt{sample-root-scripts/read\_PMT.C} and \texttt{sample-root-scripts/testgeo.C} provide general examples for how to read \texttt{wcsimT} and \texttt{wcsimGeoT}, and are probably the best starting point for custom analysis.  There is also some annotated example code in the next subsection.
 
@@ -378,7 +378,7 @@ The files \texttt{sample-root-scripts/read\_PMT.C} and \texttt{sample-root-scrip
 The root file itself contains 2 \texttt{TTree}s, each with only 1 branch containing a custom object: \texttt{wcsimT} with branch \texttt{wcsimrootevent} and \texttt{wcsimGeoT} with branch \texttt{wcsimrootgeom}.  The first has an entry corresponding to each GEANT event and contains the truth and hit data, while the second has only 1 entry which contains the geometry information for the simulated detector.  Below is a description of the class hierarchy for these two objects.
 
 \begin{description}
-  \item[WCSimRootEvent] is a container for the observed triggers. It always contains at least 1 trigger (number 0) which contains the information about the initial particle tracks given to GEANT.  If there are delatyed decay particles, these ``sub-events'' are added as additional triggers numbered from 1 onwards.  
+  \item[WCSimRootEvent] is a container for the observed triggers. It always contains at least 1 trigger (number 0) which contains the information about the initial particle tracks given to GEANT.  If there are delayed decay particles, these ``sub-events'' are added as additional triggers numbered from 1 onwards.  
   \begin{itemize}
   \item \texttt{GetTrigger(int i)} - Return trigger number \texttt{i}, a \texttt{WCSimRootTrigger*}
   \item \texttt{GetNumberOfEvents()} - Total observed triggers
@@ -387,7 +387,7 @@ The root file itself contains 2 \texttt{TTree}s, each with only 1 branch contain
   \end{itemize}
 
   \begin{description}
-    \item[WCSimRootTrigger] Container for all the information assosciated with a single trigger
+    \item[WCSimRootTrigger] Container for all the information associated with a single trigger
     \begin{itemize}
     \item \texttt{GetHeader()} - return the header with run and event numbers, etc.
     \item \texttt{GetTriggerType()} - return the trigger type enumeration
@@ -414,13 +414,13 @@ The root file itself contains 2 \texttt{TTree}s, each with only 1 branch contain
     \begin{description}
       \item[WCSimRootHeader] is a simple container for the run number, event number, and date of the event.
       \item[WCSimRootTrack] is a true track of a particles generated in the simulation. It contains all the information about the track, like particle species, mass, momentum, the start and top volumes, and the parent species.  In each trigger the number of tracks is given by \texttt{GetNTrack()}.  %Each track contains the methods: \volume{GetIpnu()}, \volume{GetFlag()}, \volume{GetM()}, \volume{GetP()}, \volume{GetE()}, \volume{GetStartvol()}, \volume{GetStopvol()}, \volume{GetDir(i)}, \volume{GetPdir(i)}, \volume{GetStop(i)}, \volume{GetStart(i)}, \volume{GetParenttype(i)}, \volume{GetTime()}, \volume{GetId()}.
-      \item[WCSimRootCherenkovHit] These hits are records of photons hitting the PMTs before the digitization step (and associated threshold, etc.). In each trigger the number of true cherenkov hits is given by \texttt{GetNcherenkovhits()}.
+      \item[WCSimRootCherenkovHit] These hits are records of photons hitting the PMTs before the digitization step (and associated threshold, etc.). In each trigger the number of true Cherenkov hits is given by \texttt{GetNcherenkovhits()}.
           \begin{itemize}
           \item \texttt{GetTotalPe(0)} - the position in the array of HitTimes
           \item \texttt{GetTotalPe(1)} - the number of true photons that hit this PMT, which is also the number of entries in that list that belong to this PMT
           \item \texttt{GetTubeID()} - tube id number
           \end{itemize}
-      \item[WCSimRootCherenkovHitTime] This list stores the true time and parent ids of each cherenkov photon.  So, by looking up the photons assosciated with a particular PMT as above, the particles which contributed light to a particular phototube can be determined.
+      \item[WCSimRootCherenkovHitTime] This list stores the true time and parent ids of each Cherenkov photon.  So, by looking up the photons associated with a particular PMT as above, the particles which contributed light to a particular phototube can be determined.
           \begin{itemize}
           \item \texttt{GetTruetime()} - true time of the hit
           \item \texttt{GetParentID()} - ID number of parent, allowing each photon to be traced to a specific true particle
