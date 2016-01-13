@@ -238,7 +238,7 @@ In order to implement your own digitizer class, you must create your own class d
 \begin{description}
 \item[constructor] This must:
   \begin{itemize}
-  \item Base constructor i.e. \texttt{WCSimWCDigitizerBase(name, myDetector, myMessenger, DigitizerType\_t)}
+  \item Call the base constructor i.e. \texttt{WCSimWCDigitizerBase(name, myDetector, myMessenger, DigitizerType\_t)}
   \item Set \texttt{triggerClassName}
   \item Call \texttt{GetVariables()}
   \end{itemize}
@@ -274,7 +274,7 @@ In order to implement your own trigger class, you must create your own class der
 \begin{description}
 \item[constructor] This must:
   \begin{itemize}
-  \item Base constructor i.e. \texttt{WCSimWCTriggerBase(name, myDetector, myMessenger)}
+  \item Call the base constructor i.e. \texttt{WCSimWCTriggerBase(name, myDetector, myMessenger)}
   \item Set \texttt{triggerClassName}
   \item Call \texttt{GetVariables()}
   \end{itemize}
@@ -344,7 +344,7 @@ The default mode is 0.
 
 Dark noise options may be chosen in \texttt{(no)vis.mac}, the default input file.
 \begin{description}
-\item[/DarkRate/SetDarkRate] selects the dark noise rate. Common values are 0 kHz (i.e. off), 4.2 kHz (SKDETSIM SKI default), and 8.4 kHz (20'' HPDs and box and line PMTs).
+\item[/DarkRate/SetDarkRate] selects the dark noise rate. Common values are 0 kHz (i.e. off), 4.2 kHz (SKI default), and 8.4 kHz (20'' HPDs and box and line PMTs).
 \item[/DarkRate/SetConvert] converts dark noise frequency before digitization to after digitization by setting suitable factor. Common values are 1.367 (normal PMTs), 1.120 (HPDs), 1.126 (box and line PMTs).
 \item[/DarkRate/SetDarkMode] selects how to add dark noise. Allowed options are:
   \begin{enumerate}
