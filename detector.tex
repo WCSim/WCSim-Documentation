@@ -1,5 +1,5 @@
 \input{preamble}
-\author{Alexander Himmel, Johannes Hoppenau, Joseph Lozier}
+\author{Thomas Dealtry, Alexander Himmel, Johannes Hoppenau, Joseph Lozier}
 \title{Simulating Water Cherenkov Detectors Using \texttt{WCSim}}
 
 \graphicspath{ {figures/} }
@@ -129,7 +129,7 @@ To set up a new detector geometry the following parameters must be set:
 
 \item[WCCapPMTSpacing] defines the center-to-center spacing of the PMTs on the top and the bottom caps of the detector.
 
-\item[WCCapEdgeLimit] is the maximum distance between the center of the cap and the outer edge of a cap PMT (the edge is WCPMTRadius away from the center of the PMT, whose coordiantes on the cap are half-integer multipules of WCCapPMTSpacing). This length has to be smaller than half the \texttt{WCIDDiameter}. Otherwise there may be PMTs that intersect the edge of the caps.  The WCSimConstructWC places PMTs on the caps in a grid subject only to this constraint.  Note that the four centermost cap PMTs are equidistant from the cylinder axis.
+\item[WCCapEdgeLimit] is the maximum distance between the center of the cap and the outer edge of a cap PMT (the edge is WCPMTRadius away from the center of the PMT, whose coordinates on the cap are half-integer multipules of WCCapPMTSpacing). This length has to be smaller than half the \texttt{WCIDDiameter}. Otherwise there may be PMTs that intersect the edge of the caps.  The WCSimConstructWC places PMTs on the caps in a grid subject only to this constraint.  Note that the four centermost cap PMTs are equidistant from the cylinder axis.
 
 \item[WCBlackSheetThickness] the thickness of the blacksheet.
 
@@ -205,9 +205,9 @@ Some rules of thumb to avoid overlaps are: \texttt{WCBarrelPMTOffset > WCPMTExpo
 
 \subsection{Input Files}
 
-Some tuning parameters are found in \texttt{jobOptions.mac} and \texttt{tuning\_parameters.mac}, which are in seperate files because they must be loaded at specific times during initialization.  The bulk of options, however, may be found in \texttt{vis.mac}, the default inupt file.  WCSim is a GEANT4 program  and accepts GEANT4 commands as an input file or at runtime.  GEANT documentation describes the commands not detailed here.
+Some tuning parameters are found in \texttt{jobOptions.mac} and \texttt{tuning\_parameters.mac}, which are in separate files because they must be loaded at specific times during initialization.  The bulk of options, however, may be found in \texttt{vis.mac}, the default input file.  WCSim is a GEANT4 program  and accepts GEANT4 commands as an input file or at runtime.  GEANT documentation describes the commands not detailed here.
 \begin{description}
-\item[/WCSim/WCgeom] selects a set of geometry parameters (see \ref{sec:param}.)  It does not create a new geometry.  Availible arguments include \texttt{SuperK} and \texttt{DUSEL\_200kton\_12inch\_HQE\_10perCent}.  New geometries are easily added and a full list of those already available may be found in \srcfile{DetectorMessenger.cc}
+\item[/WCSim/WCgeom] selects a set of geometry parameters (see \ref{sec:param}.)  It does not create a new geometry.  Available arguments include \texttt{SuperK} and \texttt{DUSEL\_200kton\_12inch\_HQE\_10perCent}.  New geometries are easily added and a full list of those already available may be found in \srcfile{DetectorMessenger.cc}
 \item[/WCSim/Construct] constructs the detector geometry in memory based on the previously selected parameters.  Takes no arguments.
 \item[/WCSim/PMTQEMethod] Selects the quantum efficiency method. Possible arguments are: \texttt{Stacking\_Only}, in which the QE is applied to reduce the total number of photons when the photons are generated; \texttt{Stacking\_And\_SensitiveDetector}, which the (constant) QE at the most efficient wavelength is applied at photon creation, then the remaining (wavelength-dependent) loss is applied at the detector; and \texttt{SensitiveDetector\_Only}, in which QE is applied at the detector only.
 \item[/WCSim/PMTCollEff] Selects wavelength-dependent (\texttt{on}) or -independent (\texttt{off}) quantum efficiency model.
@@ -216,6 +216,154 @@ Some tuning parameters are found in \texttt{jobOptions.mac} and \texttt{tuning\_
 \end{description}
 
 
+
+\section{DAQ classes - for dark noise, digitization, and triggering}
+
+\subsection{WCSimWCAddDarkNoise}
+\label{sec:daq:darknoise}
+
+In order for the effect of dark noise to be included correctly in the simulation it must be added throughout the time of the event. The easiest way to do this would be to add dark noise in a large window that is sure to incorporate any late activity (e.g. Michel electrons). Unfortunately this is computationally expensive, so this class has various options to add the dark noise only at relevant times.
+\begin{description}
+\item[In a predefined absolute time window] Set the first/last time and fill in the area in-between with dark noise.
+\item[In a predefined time window around each hit] Set the duration of the window (note that noise is added in the range $\textrm{hit time} - \tau/2$ to $\textrm{hit time} + \tau/2$, where $\tau$ is the window value in the .mac file).
+\end{description}
+The optimal mode and values need to be tuned to each simulation type (e.g. electron particle gun, muon particle gun, beam, atmospherics, ...).
+
+\subsection{WCSimWCDigitizer}
+\label{sec:daq:digitizer}
+
+This part of the code uses a base class (\texttt{WCSimWCDigitizerBase}), and concrete implementations (e.g. \texttt{WCSimWCDigitizerSKI}). The purpose of the class is to take an input \texttt{WCSimWCDigitsCollection} (``WCRawPMTSignalCollection'', the collection of hits including dark noise) and output a \texttt{WCSimWCDigitsCollection} (``WCDigitizedStoreCollection'', the collection of digits). In this, a ``hit'' is a photoelectron (from a Cherenkov photon or dark noise) depositing charge on a PMT, and  a ``digit'' is an integration of photons which includes electronics threshold effects.
+
+In order to implement your own digitizer class, you must create your own class derived from \texttt{WCSimWCDigitizerBase} in \texttt{WCSimWCDigitizer.\{hh,cc\}} and implement the following:
+\begin{description}
+\item[constructor] This must:
+  \begin{itemize}
+  \item Call the base constructor i.e. \texttt{WCSimWCDigitizerBase(name, myDetector, myMessenger, DigitizerType\_t)}
+  \item Set \texttt{triggerClassName}
+  \item Call \texttt{GetVariables()}
+  \end{itemize}
+\item[void DigitizeHits(WCSimWCDigitsCollection*)] Should do charge integration, pulse fitting, etc.
+\item[static void Threshold(double\& pe, int\& iflag)] Should set conditions (e.g. charge cut) when a digit is rejected
+\item[int GetDefaultDeadTime()]
+\item[int GetDefaultIntegrationWindow()]
+\end{description}
+If your new class has any options (e.g. integration time, deadtime, ...) these options should be added to \texttt{WCSimWCDigitizerBase} and not the derived class. This is due to the way that the options are read in.
+
+The complete steps to add a new digitizer class are as follows:
+\begin{itemize}
+\item Create the new class, derived from \texttt{WCSimWCDigitizerBase}.
+\item Add the new digitizer type to \texttt{WCSimEnumerations.hh}.
+\item Add the creation of the new digitizer class to the WCSimEventAction constructor.
+\item Add the new option to the list of allowed digitizers in \texttt{WCSimWCDAQMessenger} (there are 2 places in the code to add this!). 
+\item If there are any new-digitizer-specific options:
+  \begin{itemize}
+  \item Add the new parameters to the \texttt{WCSimWCDigitizerBase} class, including set methods.
+  \item Add the new options to the \texttt{WCSimWCDAQMessenger} class, including calls to the new \texttt{WCSimWCDigitizerBase} set methods.
+  \item Document the new options in this document, and in \texttt{daq.mac}.
+  \end{itemize}
+\end{itemize}
+
+\texttt{WCSimWCTriggerBase} assumes that ``WCDigitizedStoreCollection'' has, on a given PMT, its digits ordered in time. This ordering should be maintained in all new digitizer classes, in order for trigger classes to function correctly.
+
+\subsection{WCSimWCTrigger}
+\label{sec:daq:trigger}
+
+This part of the code uses a base class (\texttt{WCSimWCTriggerBase}), and concrete implementations (e.g. \texttt{WCSimWCTriggerNDigits}). The purpose of the class is to take an input \texttt{WCSimWCDigitsCollection} (``WCDigitizedStoreCollection'', the collection of digits) and output a \texttt{WCSimWCDigitsCollection} (``WCDigitizedCollection'', the collection of triggered digits), and a series of \texttt{vector}'s with the trigger times, trigger types, and extra trigger information.
+
+In order to implement your own trigger class, you must create your own class derived from \texttt{WCSimWCTriggerBase} in \texttt{WCSimWCTrigger.\{cc,hh\}} and implement the following:
+\begin{description}
+\item[constructor] This must:
+  \begin{itemize}
+  \item Call the base constructor i.e. \texttt{WCSimWCTriggerBase(name, myDetector, myMessenger)}
+  \item Set \texttt{triggerClassName}
+  \item Call \texttt{GetVariables()}
+  \end{itemize}
+\item[void DoTheWork(WCSimWCDigitsCollection*)] Calls the relevant trigger algorithm(s). If calling multiple algorithms, also handles the creation/deletion of intermediate \texttt{WCSimWCDigitsCollection}'s.
+\item[void Alg*(WCSimWCDigitsCollection*)] Your new algorithm. Should fill the \texttt{vector}'s: \texttt{TriggerTimes}, \texttt{TriggerTypes}, \texttt{TriggerInfos} with relevant information. Currently all algorithms are added to \texttt{WCSimWCTriggerBase} in order for new triggers to use multiple algorithms without copying code.
+\end{description}
+The following default values of trigger options can also be implemented, if an NDigits-like trigger is used in the class:
+\begin{description}
+\item[int GetDefaultMultiDigitsPerTrigger()]
+\item[int GetDefaultNDigitsWindow()]
+\item[int GetDefaultNDigitsThreshold()]
+\item[int GetDefaultNDigitsPreTriggerWindow()]
+\item[int GetDefaultNDigitsPostTriggerWindow()]
+\end{description}
+If your new class has any options (e.g. threshold, ...) these options should be added to \texttt{WCSimWCTriggerBase} and not the derived class. This is due to the way that the options are read in.
+
+The complete steps to add a new trigger class are as follows:
+\begin{itemize}
+\item Add the new algorithm to \texttt{WCSimWCTriggerBase}.
+\item Add the new trigger type to \texttt{WCSimEnumerations.hh} (if applicable).
+\item Create the new class, derived from \texttt{WCSimWCTriggerBase}.
+\item Add the new option to the list of allowed triggers in \texttt{WCSimWCDAQMessenger} (there are 2 places in the code to add this!). 
+\item Add the creation of the new trigger class to the WCSimEventAction constructor.
+\item If there are any new-trigger-specific options:
+  \begin{itemize}
+  \item Add the new parameters to the \texttt{WCSimWCTriggerBase} class, including set methods.
+  \item Add the new options to the \texttt{WCSimWCDAQMessenger} class, including calls to the new \texttt{WCSimWCTriggerBase} set methods.
+  \item Document the new options in this document, and in \texttt{daq.mac}.
+  \end{itemize}
+\end{itemize}
+
+
+\subsection{Input files}
+\label{sec:daq:options}
+
+\subsubsection{Digitizer options}
+The digitizer class to use is chosen in \texttt{(no)vis.mac}, the default input file.
+\begin{description}
+\item[/DAQ/Digitizer] selects the digitizer to use. Available arguments include \texttt{SKI}. New digitizers are easily added and a full list of those already available may be found in \srcfile{WCSimWCDAQMessenger.cc}.
+\end{description}
+Digitizer-specific options are specified in \texttt{daq.mac}.
+\begin{description}
+\item[/DAQ/DigitizerOpt/IntegrationWindow] selects how long the digitizer integrates for. The default is class specific (for SKI it is 400 ns).
+\item[/DAQ/DigitizerOpt/DeadTime] selects for how long after creating a digit the digitizer is dead for. The default is class specific (for SKI it is 0 ns).
+\end{description}
+
+\subsubsection{Trigger options}
+The trigger class to use is chosen in \texttt{(no)vis.mac}, the default input file.
+\begin{description}
+\item[/DAQ/Trigger] selects the trigger class to use. Available arguments include \texttt{NDigits}. New triggers are easily added and a full list of those already available may be found in \srcfile{WCSimWCDAQMessenger.cc}.
+\end{description}
+Trigger-specific options are specified in \texttt{daq.mac}.
+\begin{description}
+
+\item[/DAQ/MultiDigitsPerTrigger] specifies whether to allow multiple digits per PMT per trigger, or restrict the saved digits in a trigger to the first on a PMT. The default is class specific (for NDigits it is false).
+
+\item[/DAQ/TriggerNDigits/Threshold] selects the threshold number of hits for the NDigits trigger. The default is class specific (for NDigits it is 25).
+\item[/DAQ/TriggerNDigits/Window] selects the time window to apply the NDigits trigger to. The default is class specific (for NDigits it is 200 ns).
+\item[/DAQ/TriggerNDigits/AdjustForNoise] specifies whether the NDigits threshold should be automatically increased to take account of the average dark noise rate. The default is true.
+\item[/DAQ/TriggerNDigits/PreTriggerWindow] selects how far in the past (relative to the trigger time) to save digits to the output file. The value is forced negative. The default is class specific (for NDigits it is $-$400 ns). 
+\item[/DAQ/TriggerNDigits/PostTriggerWindow] selects how far in the future (relative to the trigger time) to save digits to the output file. The value is forced positive. The default is class specific (for NDigits it is $+$950 ns). 
+
+\item[/DAQ/TriggerSaveFailures/Mode] selects which triggers to save. Allowed options are:
+  \begin{enumerate}
+  \item [0.]\setcounter{enumi}{0} Save only events which pass triggers;
+  \item Save both events which pass triggers, and events which fail triggers (with a dummy trigger time);
+  \item Save only events which fail triggers (with a dummy trigger time).
+  \end{enumerate}
+The default mode is 0.
+\item[/DAQ/TriggerSaveFailures/TriggerTime] selects the dummy trigger time for events which fail all triggers. The default is 100 ns.
+\item[/DAQ/TriggerSaveFailures/PreTriggerWindow] selects how far in the past (relative to the trigger time) to save digits to the output file. The value is forced negative. The default is $-$400 ns. 
+\item[/DAQ/TriggerSaveFailures/PostTriggerWindow] selects how far in the future (relative to the trigger time) to save digits to the output file. The value is forced positive. The default is $+$950 ns. 
+\end{description}
+
+\subsubsection{Dark noise options}
+Dark noise options may be chosen in \texttt{(no)vis.mac}, the default input file.
+\begin{description}
+\item[/DarkRate/SetDarkRate] selects the dark noise rate. Common values are 0 kHz (i.e. off), 4.2 kHz (SKI default), and 8.4 kHz (20'' HPDs and box and line PMTs).
+\item[/DarkRate/SetConvert] converts dark noise frequency before digitization to after digitization by setting suitable factor. Common values are 1.367 (normal PMTs), 1.120 (HPDs), 1.126 (box and line PMTs).
+\item[/DarkRate/SetDarkMode] selects how to add dark noise. Allowed options are:
+  \begin{enumerate}
+  \item [0.]\setcounter{enumi}{0} Adds dark noise in range /DarkRate/SetDarkLow to /DarkRate/SetDarkHigh;
+  \item Adds dark noise in a $\pm$(/DarkRate/SetDarkWindow)/2 window around each hit.
+  \end{enumerate}
+The default mode is 1.
+\item[/DarkRate/SetDarkLow] When using dark mode 0, add dark noise in a window starting at this value.
+\item[/DarkRate/SetDarkHigh] When using dark mode 0, add dark noise in a window ending at this value.
+\item[/DarkRate/SetDarkWindow] When using dark mode 1, add dark noise in a $\pm$(/DarkRate/SetDarkWindow)/2 window around each hit.
+\end{description}
 
 \section{Output Root File}
 
@@ -228,7 +376,7 @@ Some tuning parameters are found in \texttt{jobOptions.mac} and \texttt{tuning\_
 
 WCSim writes the results of the simulation in a root file. You can set the name and path of this file in the \texttt{vis.mac} file using the \texttt{/WCSimIO/RootFile} command.  To read from the root file, the command \texttt{gSystem.Load("<\emph{WCSim Directory}>/libWCSimRoot.so")} should be run in root to load shared classes.  This shared object library is created by running "gmake shared" on the command line.
 
-A typical analysis will loop through events (one per simulated initial vertex), and in each event loop through the observed triggers (sually one for the initial particles and sometimes additional triggers for delayed decay products).  In each tigger, you access a list of digitized hits, each containing the charge, time, and ID of the hit PMT.  To get the location of the hit, you use the geometry object to access the PMT object that corresponds to that Tube ID.  This structure avoids having to store a list containing every PMT in every sub-event.
+A typical analysis will loop through events (one per simulated initial vertex), and in each event loop through the observed triggers (usually one for the initial particles and sometimes additional triggers for delayed decay products).  In each tigger, you access a list of digitized hits, each containing the charge, time, and ID of the hit PMT.  To get the location of the hit, you use the geometry object to access the PMT object that corresponds to that Tube ID.  This structure avoids having to store a list containing every PMT in every sub-event.
 
 The files \texttt{sample-root-scripts/read\_PMT.C} and \texttt{sample-root-scripts/testgeo.C} provide general examples for how to read \texttt{wcsimT} and \texttt{wcsimGeoT}, and are probably the best starting point for custom analysis.  There is also some annotated example code in the next subsection.
 
@@ -238,7 +386,7 @@ The files \texttt{sample-root-scripts/read\_PMT.C} and \texttt{sample-root-scrip
 The root file itself contains 2 \texttt{TTree}s, each with only 1 branch containing a custom object: \texttt{wcsimT} with branch \texttt{wcsimrootevent} and \texttt{wcsimGeoT} with branch \texttt{wcsimrootgeom}.  The first has an entry corresponding to each GEANT event and contains the truth and hit data, while the second has only 1 entry which contains the geometry information for the simulated detector.  Below is a description of the class hierarchy for these two objects.
 
 \begin{description}
-  \item[WCSimRootEvent] is a container for the observed triggers. It always contains at least 1 trigger (number 0) which contains the information about the initial particle tracks given to GEANT.  If there are delatyed decay particles, these ``sub-events'' are added as additional triggers numbered from 1 onwards.  
+  \item[WCSimRootEvent] is a container for the observed triggers. It always contains at least 1 trigger (number 0) which contains the information about the initial particle tracks given to GEANT.  If there are delayed decay particles, these ``sub-events'' are added as additional triggers numbered from 1 onwards.  
   \begin{itemize}
   \item \texttt{GetTrigger(int i)} - Return trigger number \texttt{i}, a \texttt{WCSimRootTrigger*}
   \item \texttt{GetNumberOfEvents()} - Total observed triggers
@@ -247,9 +395,11 @@ The root file itself contains 2 \texttt{TTree}s, each with only 1 branch contain
   \end{itemize}
 
   \begin{description}
-    \item[WCSimRootTrigger] Container for all the information assosciated with a single trigger
+    \item[WCSimRootTrigger] Container for all the information associated with a single trigger
     \begin{itemize}
     \item \texttt{GetHeader()} - return the header with run and event numbers, etc.
+    \item \texttt{GetTriggerType()} - return the trigger type enumeration
+    \item \texttt{GetTriggerInfo()} - return additional trigger information (e.g. the number of digits in the trigger decision window that caused the trigger to trigger)
     \item \texttt{GetPi0Info()} - return Pi0 information if it was set to be stored in the mac file
     \item \texttt{GetMode()} - interaction mode code number
     \item \texttt{GetVtx(int i)} - event vertex, 0=x, 1=y, 2=z
@@ -258,10 +408,11 @@ The root file itself contains 2 \texttt{TTree}s, each with only 1 branch contain
     \item \texttt{GetNtrack()} - number of true particle tracks
     \item \texttt{GetTracks()} - TClonesArray of true particle tracks
 
-    \item \texttt{GetNumTubesHit()} - number of tubes with a true hit (quantum efficiency is already applied)
-    \item \texttt{GetNcherenkovhits()} - number of true chereknov hits (quantum efficiency is already applied)
+    \item \texttt{GetNumTubesHit()}  -number of tubes with a true hit (quantum efficiency is already applied) (Note: ``true'' hit means either a photon or dark noise hit)
+    \item \texttt{GetNcherenkovhits()} - number of tubes with a true hit (quantum efficiency is already applied) 
     \item \texttt{GetCherenkovHits()} - true PMT hits in each PMT (quantum efficiency is already applied)
-    \item \texttt{GetCherenkovHitTimes()} - the true times of all the cherenkov hits (quantum efficiency is already applied)
+    \item \texttt{GetNcherenkovhittimes()} - number of true hits (quantum efficiency is already applied)
+    \item \texttt{GetCherenkovHitTimes()} - the true times of all the hits (quantum efficiency is already applied)
 
     \item \texttt{GetNcherenkovdigihits()} - number of digitized hits
     \item \texttt{GetSumQ()} - sum of digitized charge
@@ -271,13 +422,13 @@ The root file itself contains 2 \texttt{TTree}s, each with only 1 branch contain
     \begin{description}
       \item[WCSimRootHeader] is a simple container for the run number, event number, and date of the event.
       \item[WCSimRootTrack] is a true track of a particles generated in the simulation. It contains all the information about the track, like particle species, mass, momentum, the start and top volumes, and the parent species.  In each trigger the number of tracks is given by \texttt{GetNTrack()}.  %Each track contains the methods: \volume{GetIpnu()}, \volume{GetFlag()}, \volume{GetM()}, \volume{GetP()}, \volume{GetE()}, \volume{GetStartvol()}, \volume{GetStopvol()}, \volume{GetDir(i)}, \volume{GetPdir(i)}, \volume{GetStop(i)}, \volume{GetStart(i)}, \volume{GetParenttype(i)}, \volume{GetTime()}, \volume{GetId()}.
-      \item[WCSimRootCherenkovHit] These hits are records of photons hitting the PMTs before the digitization step (and associated threshold, etc.). In each trigger the number of true cherenkov hits is given by \texttt{GetNcherenkovhits()}.
+      \item[WCSimRootCherenkovHit] These hits are records of photons hitting the PMTs before the digitization step (and associated threshold, etc.). In each trigger the number of true Cherenkov hits is given by \texttt{GetNcherenkovhits()}.
           \begin{itemize}
           \item \texttt{GetTotalPe(0)} - the position in the array of HitTimes
           \item \texttt{GetTotalPe(1)} - the number of true photons that hit this PMT, which is also the number of entries in that list that belong to this PMT
           \item \texttt{GetTubeID()} - tube id number
           \end{itemize}
-      \item[WCSimRootCherenkovHitTime] This list stores the true time and parent ids of each cherenkov photon.  So, by looking up the photons assosciated with a particular PMT as above, the particles which contributed light to a particular phototube can be determined.
+      \item[WCSimRootCherenkovHitTime] This list stores the true time and parent ids of each Cherenkov photon.  So, by looking up the photons associated with a particular PMT as above, the particles which contributed light to a particular phototube can be determined.
           \begin{itemize}
           \item \texttt{GetTruetime()} - true time of the hit
           \item \texttt{GetParentID()} - ID number of parent, allowing each photon to be traced to a specific true particle
@@ -286,6 +437,7 @@ The root file itself contains 2 \texttt{TTree}s, each with only 1 branch contain
           \begin{itemize}
           \item \texttt{GetQ()} - the total charge measured by the PMT
           \item \texttt{GetT()} - the measured time of the hit
+          \item \texttt{GetPhotonIds()} - the position in WCSimRootCherenkovHitTime of the raw hits that contribute to this digit. This allows tracing from digit to specific true particle, or noise
           \item \texttt{GetTubeId()} - ID number of the PMT
           \end{itemize}
     \end{description}
