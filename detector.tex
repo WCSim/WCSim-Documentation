@@ -259,7 +259,7 @@ The complete steps to add a new digitizer class are as follows:
   \begin{itemize}
   \item Add the new parameters to the \texttt{WCSimWCDigitizerBase} class, including set methods.
   \item Add the new options to the \texttt{WCSimWCDAQMessenger} class, including calls to the new \texttt{WCSimWCDigitizerBase} set methods.
-  \item Document the new options in this document, and in \texttt{(no)vis.mac}.
+  \item Document the new options in this document, and in \texttt{daq.mac}.
   \end{itemize}
 \end{itemize}
 
@@ -302,7 +302,7 @@ The complete steps to add a new trigger class are as follows:
   \begin{itemize}
   \item Add the new parameters to the \texttt{WCSimWCTriggerBase} class, including set methods.
   \item Add the new options to the \texttt{WCSimWCDAQMessenger} class, including calls to the new \texttt{WCSimWCTriggerBase} set methods.
-  \item Document the new options in this document, and in \texttt{(no)vis.mac}.
+  \item Document the new options in this document, and in \texttt{daq.mac}.
   \end{itemize}
 \end{itemize}
 
@@ -310,17 +310,24 @@ The complete steps to add a new trigger class are as follows:
 \subsection{Input files}
 \label{sec:daq:options}
 
-The options to choose the digitizer class are specified in \texttt{(no)vis.mac}, the default input file.
+\subsubsection{Digitizer options}
+The digitizer class to use is chosen in \texttt{(no)vis.mac}, the default input file.
 \begin{description}
 \item[/DAQ/Digitizer] selects the digitizer to use. Available arguments include \texttt{SKI}. New digitizers are easily added and a full list of those already available may be found in \srcfile{WCSimWCDAQMessenger.cc}.
-
+\end{description}
+Digitizer-specific options are specified in \texttt{daq.mac}.
+\begin{description}
 \item[/DAQ/DigitizerOpt/IntegrationWindow] selects how long the digitizer integrates for. The default is class specific (for SKI it is 400 ns).
 \item[/DAQ/DigitizerOpt/DeadTime] selects for how long after creating a digit the digitizer is dead for. The default is class specific (for SKI it is 0 ns).
 \end{description}
 
-The options to choose the trigger class are specified in \texttt{(no)vis.mac}, the default input file.
+\subsubsection{Trigger options}
+The trigger class to use is chosen in \texttt{(no)vis.mac}, the default input file.
 \begin{description}
 \item[/DAQ/Trigger] selects the trigger class to use. Available arguments include \texttt{NDigits}. New triggers are easily added and a full list of those already available may be found in \srcfile{WCSimWCDAQMessenger.cc}.
+\end{description}
+Trigger-specific options are specified in \texttt{daq.mac}.
+\begin{description}
 
 \item[/DAQ/MultiDigitsPerTrigger] specifies whether to allow multiple digits per PMT per trigger, or restrict the saved digits in a trigger to the first on a PMT. The default is class specific (for NDigits it is false).
 
@@ -342,6 +349,7 @@ The default mode is 0.
 \item[/DAQ/TriggerSaveFailures/PostTriggerWindow] selects how far in the future (relative to the trigger time) to save digits to the output file. The value is forced positive. The default is $+$950 ns. 
 \end{description}
 
+\subsubsection{Dark noise options}
 Dark noise options may be chosen in \texttt{(no)vis.mac}, the default input file.
 \begin{description}
 \item[/DarkRate/SetDarkRate] selects the dark noise rate. Common values are 0 kHz (i.e. off), 4.2 kHz (SKI default), and 8.4 kHz (20'' HPDs and box and line PMTs).
