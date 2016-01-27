@@ -205,7 +205,7 @@ Some rules of thumb to avoid overlaps are: \texttt{WCBarrelPMTOffset > WCPMTExpo
 
 \subsection{Input Files}
 
-Some tuning parameters are found in \texttt{jobOptions.mac} and \texttt{tuning\_parameters.mac}, which are in separate files because they must be loaded at specific times during initialization.  The bulk of options, however, may be found in \texttt{vis.mac}, the default input file.  WCSim is a GEANT4 program  and accepts GEANT4 commands as an input file or at runtime.  GEANT documentation describes the commands not detailed here.
+Some tuning parameters are found in \texttt{jobOptions.mac} and \texttt{tuning\_parameters.mac}, which are in separate files because they must be loaded at specific times during initialization.  The bulk of options, however, may be found in \texttt{WCSim.mac}, the default input file.  WCSim is a GEANT4 program  and accepts GEANT4 commands as an input file or at runtime.  GEANT documentation describes the commands not detailed here.
 \begin{description}
 \item[/WCSim/WCgeom] selects a set of geometry parameters (see \ref{sec:param}.)  It does not create a new geometry.  Available arguments include \texttt{SuperK} and \texttt{DUSEL\_200kton\_12inch\_HQE\_10perCent}.  New geometries are easily added and a full list of those already available may be found in \srcfile{DetectorMessenger.cc}
 \item[/WCSim/Construct] constructs the detector geometry in memory based on the previously selected parameters.  Takes no arguments.
@@ -311,7 +311,7 @@ The complete steps to add a new trigger class are as follows:
 \label{sec:daq:options}
 
 \subsubsection{Digitizer options}
-The digitizer class to use is chosen in \texttt{(no)vis.mac}, the default input file.
+The digitizer class to use is chosen in \texttt{WCSim.mac}, the default input file.
 \begin{description}
 \item[/DAQ/Digitizer] selects the digitizer to use. Available arguments include \texttt{SKI}. New digitizers are easily added and a full list of those already available may be found in \srcfile{WCSimWCDAQMessenger.cc}.
 \end{description}
@@ -322,7 +322,7 @@ Digitizer-specific options are specified in \texttt{daq.mac}.
 \end{description}
 
 \subsubsection{Trigger options}
-The trigger class to use is chosen in \texttt{(no)vis.mac}, the default input file.
+The trigger class to use is chosen in \texttt{WCSim.mac}, the default input file.
 \begin{description}
 \item[/DAQ/Trigger] selects the trigger class to use. Available arguments include \texttt{NDigits}. New triggers are easily added and a full list of those already available may be found in \srcfile{WCSimWCDAQMessenger.cc}.
 \end{description}
@@ -350,7 +350,7 @@ The default mode is 0.
 \end{description}
 
 \subsubsection{Dark noise options}
-Dark noise options may be chosen in \texttt{(no)vis.mac}, the default input file.
+Dark noise options may be chosen in \texttt{WCSim.mac}, the default input file.
 \begin{description}
 \item[/DarkRate/SetDarkRate] selects the dark noise rate. Common values are 0 kHz (i.e. off), 4.2 kHz (SKI default), and 8.4 kHz (20'' HPDs and box and line PMTs).
 \item[/DarkRate/SetConvert] converts dark noise frequency before digitization to after digitization by setting suitable factor. Common values are 1.367 (normal PMTs), 1.120 (HPDs), 1.126 (box and line PMTs).
@@ -374,7 +374,7 @@ The default mode is 1.
 \caption{The class hierarchy of the WCSimRootEvent written to the output file.} \label{fig:rootfile}
 \end{figure}
 
-WCSim writes the results of the simulation in a root file. You can set the name and path of this file in the \texttt{vis.mac} file using the \texttt{/WCSimIO/RootFile} command.  To read from the root file, the command \texttt{gSystem.Load("<\emph{WCSim Directory}>/libWCSimRoot.so")} should be run in root to load shared classes.  This shared object library is created by running "gmake shared" on the command line.
+WCSim writes the results of the simulation in a root file. You can set the name and path of this file in the \texttt{WCSim.mac} file using the \texttt{/WCSimIO/RootFile} command.  To read from the root file, the command \texttt{gSystem.Load("<\emph{WCSim Directory}>/libWCSimRoot.so")} should be run in root to load shared classes.  This shared object library is created by running "gmake shared" on the command line.
 
 A typical analysis will loop through events (one per simulated initial vertex), and in each event loop through the observed triggers (usually one for the initial particles and sometimes additional triggers for delayed decay products).  In each tigger, you access a list of digitized hits, each containing the charge, time, and ID of the hit PMT.  To get the location of the hit, you use the geometry object to access the PMT object that corresponds to that Tube ID.  This structure avoids having to store a list containing every PMT in every sub-event.
 
