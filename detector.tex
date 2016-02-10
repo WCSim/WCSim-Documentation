@@ -16,7 +16,7 @@ WCSim is a flexible Geant4-based simulation of a water-Cherenkov detector with t
 
 
 \section{The WCSim Geometry}
-The \texttt{WCSimDetectorConstruction::ConstructWC()} method returns a pointer to a logical volume that contains an upright cylindrical detector. The function is defined in \srcfile{ConstructWC.cc}. The inner detector consists only of blacksheet and PMTs, and the optional top veto outer detector contains only blacksheet, whitesheet, and PMTs.
+The \texttt{WCSimDetectorConstruction::ConstructCylinder()} method returns a pointer to a logical volume that contains an upright cylindrical detector. The function is defined in \srcfile{ConstructCylinder.cc}. The inner detector consists only of blacksheet and PMTs, and the optional top veto outer detector contains only blacksheet, whitesheet, and PMTs.
 
 The PMTs and the blacksheet are organized into cells along the cylinder walls plus a top and bottom cap. This structure makes it easy to add outer detector PMTs to the sides and bottom or a steel structure behind the blacksheet. The method is written generically, making it possible to simulate many different detectors. 
 
@@ -28,14 +28,14 @@ This section describes the the volumes that make up the detector. (Figure \ref{f
   \hspace{0.1\textwidth}
   \includegraphics[width=0.40\textwidth]{annulus}
   \end{center}
-  \caption{On the left is a 3D schematic of the cylindrical detector and on the right is a 2D cross-section that better shows the volume hierarchy contained in \volume{WCBarrel}.  The outermost level is \volume{ExpHall} (dotted black line) which is an air-filled rectangle.  It contains \volume{WC} (narrow black line), the volume returned by \texttt{WCSimDetectorConstruction::ConstructWC()}.  Inside it is the water-filled cylinder \volume{WCBarrel} (blue) whose sub-volumes are labeled on the right and described in the text below.}
+  \caption{On the left is a 3D schematic of the cylindrical detector and on the right is a 2D cross-section that better shows the volume hierarchy contained in \volume{WCBarrel}.  The outermost level is \volume{ExpHall} (dotted black line) which is an air-filled rectangle.  It contains \volume{WC} (narrow black line), the volume returned by \texttt{WCSimDetectorConstruction::ConstructCylinder()}.  Inside it is the water-filled cylinder \volume{WCBarrel} (blue) whose sub-volumes are labeled on the right and described in the text below.}
 %It contains \vol{WCBarrelAnnulus}, the main part of the walls of the detector, and the the two \voume{WCCapAssembly}'s (yellow).  \vol{WCBarrelAnnulus} contains \volume{WCBarrelRing}'s which are themselves divided up into \vol{WCBarrelCell}'s (green), which in turn contain \volume{WCPMTs}.  The \volume{WCCapAssembly}'s contain the \volume{WCBarrelAnnulus}, \volume{WCBarrelBorderRing} and  \volume{WCCap} (red) are the volumes the are divided into the cells (green) that hold the PMTs (not pictured) and the blacksheet (thick black line).  \volume{WCCapAssembly} (yellow) contains \volume{WCBarrelBorderCell} and  \volume{WCPMTCap}.  Note that colors refer to both persective and section views.}
 \label{fig:hi}
 \end{figure}
 
 
 \begin{description}
-  \item[ExpHall] is the world volume. It is not constructed in  \srcfile{ConstructWC.cc} but in \srcfile{DetectorConstruction.cc}.
+  \item[ExpHall] is the world volume. It is not constructed in  \srcfile{ConstructCylinder.cc} but in \srcfile{DetectorConstruction.cc}.
   \begin{description}
     \item[WC] is a tubs filled with air. At the moment it  only contains one daughter volume:
     \begin{description}
@@ -89,7 +89,7 @@ This section describes the the volumes that make up the detector. (Figure \ref{f
 
 \section{Setup your own detector}
 
-The dimensions of the detector to be setup must be described in member variables of  \texttt{WCSimDetectorConstruction} before calling  \texttt{WCSimDetectorConstruction::ConstructWC()}. This section describes which geometric parameters must be set. The easiest and least error-prone way to to set the variables is to add a method to the \texttt{WCSimDetectorConfigs.cc} file that is a copy of an existing detector configuration with the necessary changes.
+The dimensions of the detector to be setup must be described in member variables of  \texttt{WCSimDetectorConstruction} before calling  \texttt{WCSimDetectorConstruction::ConstructCylinder()}. This section describes which geometric parameters must be set. The easiest and least error-prone way to to set the variables is to add a method to the \texttt{WCSimDetectorConfigs.cc} file that is a copy of an existing detector configuration with the necessary changes.
 You can either call this function in the constructor of \texttt{WCSimDetectorConstruction} or add it to the detector messenger (\srcfile{DetectorMessenger.cc}) if you want call it in a macro file or you want to change the detector setup dynamically. If you want to do this, you first have to use the command that calls your function (\texttt{/WCSim/WCgeom <geometry name>}) to set the parameters, and afterwards the detector construction command (\texttt{/WCSim/Construct}) to (re)construct the geometry.
 
 \subsection{Parameters}\label{sec:param}
@@ -129,7 +129,7 @@ To set up a new detector geometry the following parameters must be set:
 
 \item[WCCapPMTSpacing] defines the center-to-center spacing of the PMTs on the top and the bottom caps of the detector.
 
-\item[WCCapEdgeLimit] is the maximum distance between the center of the cap and the outer edge of a cap PMT (the edge is WCPMTRadius away from the center of the PMT, whose coordinates on the cap are half-integer multipules of WCCapPMTSpacing). This length has to be smaller than half the \texttt{WCIDDiameter}. Otherwise there may be PMTs that intersect the edge of the caps.  The WCSimConstructWC places PMTs on the caps in a grid subject only to this constraint.  Note that the four centermost cap PMTs are equidistant from the cylinder axis.
+\item[WCCapEdgeLimit] is the maximum distance between the center of the cap and the outer edge of a cap PMT (the edge is WCPMTRadius away from the center of the PMT, whose coordinates on the cap are half-integer multipules of WCCapPMTSpacing). This length has to be smaller than half the \texttt{WCIDDiameter}. Otherwise there may be PMTs that intersect the edge of the caps.  The WCSimConstructCylinder places PMTs on the caps in a grid subject only to this constraint.  Note that the four centermost cap PMTs are equidistant from the cylinder axis.
 
 \item[WCBlackSheetThickness] the thickness of the blacksheet.
 
