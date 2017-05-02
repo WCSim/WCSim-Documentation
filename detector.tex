@@ -218,6 +218,7 @@ Some tuning parameters are found in \texttt{jobOptions.mac} and \texttt{tuning\_
 
 
 \section{DAQ classes - for dark noise, digitization, and triggering}
+\label{sec:daq}
 
 \subsection{WCSimWCAddDarkNoise}
 \label{sec:daq:darknoise}
@@ -366,6 +367,7 @@ The default mode is 1.
 \end{description}
 
 \section{Output Root File}
+\label{sec:output}
 
 \begin{figure}[t!]
   \begin{center}
@@ -382,8 +384,15 @@ The files \texttt{sample-root-scripts/read\_PMT.C} and \texttt{sample-root-scrip
 
 
 \subsection{The Class Hierarchy}
+\label{sec:output:classes}
 
-The root file itself contains 2 \texttt{TTree}s, each with only 1 branch containing a custom object: \texttt{wcsimT} with branch \texttt{wcsimrootevent} and \texttt{wcsimGeoT} with branch \texttt{wcsimrootgeom}.  The first has an entry corresponding to each GEANT event and contains the truth and hit data, while the second has only 1 entry which contains the geometry information for the simulated detector.  Below is a description of the class hierarchy for these two objects.
+The root file itself contains three \texttt{TTree}s, each with only 1 branch containing a custom object:
+\begin{itemize}
+\item \texttt{wcsimT} with branch \texttt{wcsimrootevent}. This tree has many entries (corresponding to each GEANT event) which contain the truth and hit data. The structure of this tree is shown in Figure \ref{fig:rootfile};
+\item \texttt{wcsimGeoT} with branch \texttt{wcsimrootgeom}. This tree has a single entry which contains the geometry information for the simulated detector;
+\item \texttt{wcsimRootOptionsT} with branch \texttt{wcsimrootoptions}. This tree has a single entry which contains the run options used to create the file.
+\end{itemize}
+Below is a description of the class hierarchy for these three objects.
 
 \begin{description}
   \item[WCSimRootEvent] is a container for the observed triggers. It always contains at least 1 trigger (number 0) which contains the information about the initial particle tracks given to GEANT.  If there are delayed decay particles, these ``sub-events'' are added as additional triggers numbered from 1 onwards.  
@@ -458,8 +467,83 @@ The root file itself contains 2 \texttt{TTree}s, each with only 1 branch contain
     \end{description}
 \end{description}
 
+\begin{description}
+\item[WCSimRootOptions]  has methods that make the run options (i.e. options that you can set in the \texttt{.mac} file(s)). The \texttt{Get} methods are listed below, separated by the classes the option effects, for clarity.
+  \begin{description}
+  \item[WCSimDetector*] contains information about the detector geometry.
+    \begin{itemize}
+    \item \texttt{GetDetectorName()} - the name of the geometry.
+    \item \texttt{GetSavePi0()} - specifies whether to save the $\pi^0$ truth information.
+    \item \texttt{GetPMTQEMethod()} - the PMT quantum efficiency mode.
+    \item \texttt{GetOrientation()} - the PMT collection efficiency mode.
+    \end{itemize}
+  \item[WCSimWCAddDarkNoise] contains information about the dark noise simulation.
+    \begin{itemize}
+    \item \texttt{GetPMTDarkRate()} - the PMT dark noise rate.
+    \item \texttt{GetConvRate()} - convert dark noise frequency before digitization to after digitization by setting suitable factor
+    \item \texttt{GetDarkHigh()} - in mode 1, simulate dark noise up to this time in ns
+    \item \texttt{GetDarkLow()} - in mode 1, simulate dark noise from this time in ns
+    \item \texttt{GetDarkWindow()} - in mode 0, simulate dark noise in a window of $\pm\textrm{DarkWindow}/2$ ns around each hit
+    \item \texttt{GetDarkMode()} - the dark noise mode
+    \end{itemize}
+  \item[WCSimWCDigitizer*] contains information about the digitizer simulation.
+    \begin{itemize}
+    \item \texttt{GetDigitizerClassName()} - the digitizer class name.
+    \item \texttt{GetDigitizerDeadTime()} - how long (in ns) the digitizer is dead for after creating a digit before attempting to create new digits.
+    \item \texttt{GetDigitizerIntegrationWindow()} - how long (in ns) the digitizer integrates for.
+    \end{itemize}
+  \item[WCSimWCTrigger*] contains information about the trigger simulation.
+    \begin{itemize}
+    \item \texttt{GetTriggerClassName()} - the trigger class name.
+    \item \texttt{GetMultiDigitsPerTrigger()} - whether multiple digits are allowed in each trigger window.
+    \end{itemize}
+    \begin{description}
+    \item[NDigits triggers] contains information about NDigits-like trigger options
+      \begin{itemize}
+      \item \texttt{GetNDigitsThreshold()} - the NDigits threshold.
+      \item \texttt{GetNDigitsWindow()} - the number of seconds (in ns) to search for an NDigits trigger
+      \item \texttt{GetNDigitsAdjustForNoise()} - automatically add the expected number of dark noise hits to the NDigits Threshold?
+      \item \texttt{GetNDigitsPreTriggerWindow()} - how long (in ns) to save digits for before an NDigits trigger
+      \item \texttt{GetNDigitsPostTriggerWindow()} - how long (in ns) to save digits for after an NDigits trigger
+      \end{itemize}
+    \item[Save failures trigger] contains information about SaveFailures trigger options
+      \begin{itemize}
+      \item \texttt{GetSaveFailuresMode()} - do we want to save only triggered events (mode 0), both triggered events \& failed events (mode 1), or only failed events (mode 2)?
+      \item \texttt{GetSaveFailuresTime()} - what trigger time to use for SaveFailures triggers?
+      \item \texttt{GetSaveFailuresPreTriggerWindow()} - how long (in ns) to save digits for before a SaveFailures trigger
+      \item \texttt{GetSaveFailuresPostTriggerWindow()} - how long (in ns) to save digits for after a SaveFailures trigger
+      \end{itemize}
+    \end{description}
+  \item[WCSimTuningParameters] contains information about the tuning parameters.
+    \begin{itemize}
+    \item \texttt{GetRayff()} - the value of the Rayleigh scattering parameter.
+    \item \texttt{GetBsrff()} - the value of the blacksheet reflection parameter.
+    \item \texttt{GetAbwff()} - the value of the water attenuation parameter.
+    \item \texttt{GetRgcff()} - the value of the cathode reflectivity parameter.
+    \item \texttt{GetMieff()} - the value of the Mie scattering parameter.
+    \item \texttt{GetTvspacing()} - the value of the top veto PMT spacing, in cm.
+    \item \texttt{GetTopveto()} - turn on the top veto simulation?
+    \end{itemize}
+  \item[WCSimPhysicsListFactory] contains information about the physics processes simulated.
+    \begin{itemize}
+    \item \texttt{GetPhysicsListName()} - the name of the physics list.
+    \end{itemize}
+  \item[WCSimPrimaryGeneratorAction] contains information about the events generated.
+    \begin{itemize}
+    \item \texttt{GetVectorFileName()} - the name of the vector file (for a \texttt{muline} GeneratorType).
+    \item \texttt{GetGeneratorType()} - the name of the generator type.
+    \end{itemize}
+  \item[WCSimRandomParameters] contains information about the random number generation.
+    \begin{itemize}
+    \item \texttt{GetRandomSeed()} - the random seed.
+    \item \texttt{GetRandomGenerator()} - the name of the random number generator.
+    \end{itemize}
+  \end{description}
+\end{description}
+
 
 \subsection{How to Use the Files}
+\label{sec:output:usage}
 
 %\newenvironment{code}{\begin{verbatim}}{\end{verbatim}}
 
@@ -476,12 +560,17 @@ WCSimRootEvent *wcsimrootevent = new WCSimRootEvent();
 wcsimT->SetBranchAddress("wcsimrootevent",&wcsimrootevent);
 
 TTree  *wcsimGeoT = f->Get("wcsimGeoT");
-WCSimRootGeom* wcsimrootgeom = new WCSimRootGeom();
+WCSimRootGeom *wcsimrootgeom = new WCSimRootGeom();
 wcsimGeoT->SetBranchAddress("wcsimrootgeom",&wcsimrootgeom);  
-wcsimrootgeom->GetEntry(0);
+wcsimGeoT->GetEntry(0);
+
+TTree  *wcsimRootOptionsT = f->Get("wcsimRootOptionsT");
+WCSimRootOptions *wcsimrootoptions = new WCSimRootOptions();
+wcsimRootOptionsT->SetBranchAddress("wcsimrootoptions", &wcsimrootoptions);
+wcsimRootOptionsT->GetEntry(0);
 \end{lstlisting}
 
-Since the geometry tree has only one entry, you may as well load it right away.  You loop through the events as with any root tree.   However, to get at any real information from the events, you will need to load the triggers.  The first trigger contains the main event information so here we will only load the first trigger.  Then from the trigger we can load and loop through all the digitized hits.
+Since the geometry and options trees have only one entry, you may as well load them right away.  You loop through the events as with any root tree.   However, to get at any real information from the events, you will need to load the triggers.  The first trigger contains the main event information so here we will only load the first trigger.  Then from the trigger we can load and loop through all the digitized hits.
 
 \begin{lstlisting}
 wcsimT->GetEntry(ev);
@@ -505,6 +594,11 @@ If you want to know the position of the hit we extracted above, we use the geome
     double pmtX = pmt.GetPosition(0);
     double pmtY = pmt.GetPosition(1);
     double pmtZ = pmt.GetPosition(2);
+\end{lstlisting}
+
+If you want to know the run options, you can either use the \texttt{Get} methods described in Section \ref{sec:output:classes}, or to print all the information to screen just run:
+\begin{lstlisting}
+  wcsimrootoptions->Print();
 \end{lstlisting}
 
 %\subsection{root2zbs and superscan}
