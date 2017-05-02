@@ -218,6 +218,7 @@ Some tuning parameters are found in \texttt{jobOptions.mac} and \texttt{tuning\_
 
 
 \section{DAQ classes - for dark noise, digitization, and triggering}
+\label{sec:daq}
 
 \subsection{WCSimWCAddDarkNoise}
 \label{sec:daq:darknoise}
@@ -366,6 +367,7 @@ The default mode is 1.
 \end{description}
 
 \section{Output Root File}
+\label{sec:output}
 
 \begin{figure}[t!]
   \begin{center}
@@ -382,10 +384,11 @@ The files \texttt{sample-root-scripts/read\_PMT.C} and \texttt{sample-root-scrip
 
 
 \subsection{The Class Hierarchy}
+\label{sec:output:classes}
 
 The root file itself contains three \texttt{TTree}s, each with only 1 branch containing a custom object:
 \begin{itemize}
-\item \texttt{wcsimT} with branch \texttt{wcsimrootevent}. This tree has many entries (corresponding to each GEANT event) which contain the truth and hit data;
+\item \texttt{wcsimT} with branch \texttt{wcsimrootevent}. This tree has many entries (corresponding to each GEANT event) which contain the truth and hit data. The structure of this tree is shown in Figure \ref{fig:rootfile};
 \item \texttt{wcsimGeoT} with branch \texttt{wcsimrootgeom}. This tree has a single entry which contains the geometry information for the simulated detector;
 \item \texttt{wcsimRootOptionsT} with branch \texttt{wcsimrootoptions}. This tree has a single entry which contains the run options used to create the file.
 \end{itemize}
@@ -540,6 +543,7 @@ Below is a description of the class hierarchy for these three objects.
 
 
 \subsection{How to Use the Files}
+\label{sec:output:usage}
 
 %\newenvironment{code}{\begin{verbatim}}{\end{verbatim}}
 
@@ -556,12 +560,17 @@ WCSimRootEvent *wcsimrootevent = new WCSimRootEvent();
 wcsimT->SetBranchAddress("wcsimrootevent",&wcsimrootevent);
 
 TTree  *wcsimGeoT = f->Get("wcsimGeoT");
-WCSimRootGeom* wcsimrootgeom = new WCSimRootGeom();
+WCSimRootGeom *wcsimrootgeom = new WCSimRootGeom();
 wcsimGeoT->SetBranchAddress("wcsimrootgeom",&wcsimrootgeom);  
-wcsimrootgeom->GetEntry(0);
+wcsimGeoT->GetEntry(0);
+
+TTree  *wcsimRootOptionsT = f->Get("wcsimRootOptionsT");
+WCSimRootOptions *wcsimrootoptions = new WCSimRootOptions();
+wcsimRootOptionsT->SetBranchAddress("wcsimrootoptions", &wcsimrootoptions);
+wcsimRootOptionsT->GetEntry(0);
 \end{lstlisting}
 
-Since the geometry tree has only one entry, you may as well load it right away.  You loop through the events as with any root tree.   However, to get at any real information from the events, you will need to load the triggers.  The first trigger contains the main event information so here we will only load the first trigger.  Then from the trigger we can load and loop through all the digitized hits.
+Since the geometry and options trees have only one entry, you may as well load them right away.  You loop through the events as with any root tree.   However, to get at any real information from the events, you will need to load the triggers.  The first trigger contains the main event information so here we will only load the first trigger.  Then from the trigger we can load and loop through all the digitized hits.
 
 \begin{lstlisting}
 wcsimT->GetEntry(ev);
@@ -585,6 +594,11 @@ If you want to know the position of the hit we extracted above, we use the geome
     double pmtX = pmt.GetPosition(0);
     double pmtY = pmt.GetPosition(1);
     double pmtZ = pmt.GetPosition(2);
+\end{lstlisting}
+
+If you want to know the run options, you can either use the \texttt{Get} methods described in Section \ref{sec:output:classes}, or to print all the information to screen just run:
+\begin{lstlisting}
+  wcsimrootoptions->Print();
 \end{lstlisting}
 
 %\subsection{root2zbs and superscan}
