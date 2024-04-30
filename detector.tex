@@ -447,6 +447,10 @@ The root file itself contains 2 \texttt{TTree}s, each with only 1 branch contain
 
 \begin{description}
   \item[WCSimRootGeom]  has methods \texttt{GetWCCylRadius()}, \texttt{GetWCCylLength()}, \texttt{GetWCPMTRadius()} and \texttt{GetWCNumPMT()}, which return, respectively, the radius and length of the detector cylinder, the PMT radius, and the total number of PMTs.  The class can also return PMT objects by tube number via \texttt{GetPMT(i)}.
+
+  Note the above PMT-related methods apply for ID PMTs of the first kind (e.g. 20'' PMTs in the Hyper-K far detector, mPMTs in IWCD). To get information for ID PMTs of the second type, call the same methods with the optional argument \texttt{hybridsecondtype} set to \texttt{true} (the default is \texttt{false} meaning information for the first ID PMT type is returned).
+  
+  To get information for OD PMTs, there are equivalent methods with ``OD'' in the name.
     \begin{description}
     \item[WCSimRootPMT] contains information for each PMT in the detector.
     	\begin{itemize}
@@ -501,7 +505,9 @@ If you want to know the position of the hit we extracted above, we use the geome
 
 \begin{lstlisting}
     int tubeId = hit->GetTubeId();
-    WCSimRootPMT pmt = wcsimrootgeom->GetPMT(tubeId);
+    WCSimRootPMT pmt = wcsimrootgeom->GetPMT(tubeId - 1);
+    //ensure you have the correct PMT
+    assert(tubeId == pmt.GetTubeNo());
     double pmtX = pmt.GetPosition(0);
     double pmtY = pmt.GetPosition(1);
     double pmtZ = pmt.GetPosition(2);
